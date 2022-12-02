@@ -1,0 +1,52 @@
+﻿<UserControl
+    x:Class="CardLearnApp.Pages.CardElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CardLearnApp.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid x:Name="CardItem"
+          Tapped="OnCardClick"
+          Grid.Column="0"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Margin="10">
+
+        <Grid>
+            <Grid x:Name="RotationObj">
+                <Grid.Projection>
+                    <PlaneProjection x:Name="Proje" RotationY="0"/>
+                </Grid.Projection>
+                <Border x:Name="RotatableItem" 
+                        Width="800"
+                        Height="500" 
+                        Background="{ThemeResource SystemControlBaseLowAcrylicWindowBrush}" 
+                        CornerRadius="20"/>
+
+                <TextBlock Visibility="Visible" 
+                           x:Name="FrontSide" 
+                           Text="{Binding FrontSideText}" 
+                           FontSize="50" 
+                           FontFamily="Segoe MDL2" 
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Center"/>
+
+                <TextBlock Visibility="Collapsed"
+                           Text="{Binding BackSideText}" 
+                           x:Name="BackSide"
+                           FontSize="50"
+                           HorizontalAlignment="Center"
+                           FontFamily="Segoe MDL2"
+                           VerticalAlignment="Center" 
+                           RenderTransformOrigin="0.5,0.5">
+                    <TextBlock.RenderTransform>
+                        <CompositeTransform ScaleY="1" ScaleX="-1"/>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

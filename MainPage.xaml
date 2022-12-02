@@ -1,0 +1,31 @@
+﻿<Page
+    x:Class="CardLearnApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CardLearnApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    controls:BackdropMaterial.ApplyToRootOrPageBackground="True">
+
+    <Grid>
+        <controls:NavigationView PaneTitle="{Binding CurrentPageName}" x:Name="MainNav" SelectionChanged="Main_SelectionChanged">
+            <controls:NavigationView.MenuItems>
+                <controls:NavigationViewItemHeader Content="Main"/>
+
+                <controls:NavigationViewItem Content="Home" Icon="Home" Tag="Home"/>
+                <controls:NavigationViewItem Content="Card" Icon="Copy" Tag="Card"/>
+                <controls:NavigationViewItem Content="Test" Icon="OpenWith" Tag="Test"/>
+
+                <controls:NavigationViewItemHeader Content="Other"/>
+                <controls:NavigationViewItem Content="Card Editor" Icon="Edit" Tag="Edit"/>
+
+
+            </controls:NavigationView.MenuItems>
+
+            <Frame x:Name="MainFrame" Background="{StaticResource SystemControlAcrylicElementBrush}" Loaded="MainFrame_Loaded"/>
+
+        </controls:NavigationView>
+    </Grid>
+</Page>
