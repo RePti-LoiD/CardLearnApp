@@ -6,6 +6,9 @@ namespace CardLearnApp
     public sealed partial class MainPage : Page
     {
         private string currentPageName;
+        private static MainPage mainPage;
+
+        public static MainPage Instance { get => mainPage; private set => mainPage = value; }
 
         public string CurrentPageName { get => currentPageName;
             private set 
@@ -18,6 +21,11 @@ namespace CardLearnApp
         public MainPage()
         {
             InitializeComponent();
+
+            Loaded += (x, y) =>
+            {
+                mainPage = this;
+            };
         }
 
         private void Main_SelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs args)
@@ -37,6 +45,14 @@ namespace CardLearnApp
         private void MainFrame_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             NavigatePageByName("Home");
+        }
+
+        public void NavigateFrame(string name, object data)
+        {
+            string type = $"{nameof(CardLearnApp)}.{nameof(Pages)}.{name}";
+
+            MainFrame.Navigate(Type.GetType(type), data);
+            MainNav.PaneTitle = name;
         }
     }
 }

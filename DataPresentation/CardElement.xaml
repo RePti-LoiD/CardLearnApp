@@ -25,9 +25,12 @@
                         Background="{ThemeResource SystemControlBaseLowAcrylicWindowBrush}" 
                         CornerRadius="20"/>
 
-                <TextBlock Visibility="Visible" 
+                <TextBlock Visibility="Visible"
+                           Width="700"
+                           TextAlignment="Center"
                            x:Name="FrontSide" 
                            Text="{Binding FrontSideText}" 
+                           TextWrapping="WrapWholeWords"
                            FontSize="50" 
                            FontFamily="Segoe MDL2" 
                            HorizontalAlignment="Center" 
@@ -37,6 +40,8 @@
                            Text="{Binding BackSideText}" 
                            x:Name="BackSide"
                            FontSize="50"
+                           TextAlignment="Center"
+                           TextWrapping="WrapWholeWords"
                            HorizontalAlignment="Center"
                            FontFamily="Segoe MDL2"
                            VerticalAlignment="Center" 

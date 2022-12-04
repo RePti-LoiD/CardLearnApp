@@ -8,14 +8,28 @@
     mc:Ignorable="d">
 
     <Grid>
-        <FontIcon x:Name="Icon" FontFamily="Segoe Fluent Icons" Glyph="&#xe8c8;" FontSize="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
 
-        <FlipView MaxWidth="820" 
-                  Height="700 " 
-                  x:Name="CardSlider" 
-                  Background="Transparent"
-                  VerticalAlignment="Top"
-                  Margin="0, 100"
-                  Tapped="CardSlider_Tapped"/>
+        <Border Grid.Row="0" Background="{StaticResource SystemControlBaseLowAcrylicWindowBrush}"/>
+
+        <FontIcon Grid.Row="0" x:Name="Icon" FontFamily="Segoe Fluent Icons" Glyph="&#xe8c8;" FontSize="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20"/>
+
+        <TextBlock Text="{Binding BundleName}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+        <ScrollViewer>
+            <StackPanel Grid.Row="1">
+                <FlipView MaxWidth="820" 
+                          Height="700 " 
+                          x:Name="CardSlider" 
+                          Background="Transparent"
+                          VerticalAlignment="Top"
+                          Margin="0, 100"/>
+                <Grid CornerRadius="10" Background="#FF373737" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding BundleDescription}" HorizontalAlignment="Center" TextWrapping="WrapWholeWords" Width="800"/>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

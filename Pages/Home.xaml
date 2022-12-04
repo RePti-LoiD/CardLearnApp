@@ -5,11 +5,23 @@
     xmlns:local="using:CardLearnApp.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Width="900"
-    Height="800">
+    mc:Ignorable="d">
 
     <Grid>
-        <FontIcon x:Name="Icon" FontFamily="Segoe Fluent Icons"  Glyph="&#xea8a;" FontSize="100"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" x:Name="R"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="{StaticResource SystemControlBaseLowAcrylicWindowBrush}"/>
+
+        <FontIcon Grid.Row="0" x:Name="Icon" FontFamily="Segoe Fluent Icons" Glyph="&#xea8a;" FontSize="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20"/>
+
+        <TextBlock Grid.Row="0" x:Name="WelcomeText" Text="Hello, {name}, it's a good sunday today!" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Black" FontSize="25"/>
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Your Bundles" FontSize="25" Margin="50"/>
+            <GridView x:Name="BasicGridView" ItemClick="ItemClicked" IsItemClickEnabled="True" SelectionMode="Single" HorizontalAlignment="Center" VerticalAlignment="Top" BorderThickness="0"/>
+        </StackPanel>
+
     </Grid>
 </Page>

@@ -7,7 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
-    controls:BackdropMaterial.ApplyToRootOrPageBackground="True">
+    controls:BackdropMaterial.ApplyToRootOrPageBackground="True"
+    MinHeight="800"
+    MinWidth="900">
 
     <Grid>
         <controls:NavigationView PaneTitle="{Binding CurrentPageName}" x:Name="MainNav" SelectionChanged="Main_SelectionChanged">

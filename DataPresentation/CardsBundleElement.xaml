@@ -1,0 +1,43 @@
+﻿<UserControl
+    x:Class="CardLearnApp.Data.CardsBundleElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CardLearnApp.Data"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="Transparent">
+
+    <Grid Width="250" Height="300">
+        <Grid.Projection>
+            <PlaneProjection x:Name="Proje"/>
+        </Grid.Projection>
+        <Grid x:Name="FrontSide">
+            
+            <Border KeyDown="Grid_KeyDown" Background="{StaticResource SystemControlBaseLowAcrylicWindowBrush}" CornerRadius="20"/>
+            <TextBlock x:Name="BundleTitle" Text="{Binding BundleName}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 20" FontSize="20"/>
+            <Border Visibility="Collapsed" x:Name="Card1" Width="180" Height="100" CornerRadius="10" RenderTransformOrigin="0.5,0.5" Margin="51,124,19,76" UseLayoutRounding="False" d:LayoutRounding="Auto" Background="{StaticResource SystemControlAcrylicElementBrush}">
+                <Border.RenderTransform>
+                    <CompositeTransform Rotation="30"/>
+                </Border.RenderTransform>
+                <TextBlock x:Name="FCardText" Text="First Card" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="WrapWholeWords"/>
+            </Border>
+
+            <TextBlock x:Name="TextOnEmpty" Text="Empty Bundle" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+
+            <Border Visibility="Collapsed" x:Name="Card2" Width="180" Height="100" CornerRadius="10" Background="{StaticResource SystemControlAcrylicElementBrush}" RenderTransformOrigin="0.5,0.5" Margin="18,178,52,22" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                <Border.RenderTransform>
+                    <CompositeTransform Rotation="14"/>
+                </Border.RenderTransform>
+                <TextBlock x:Name="SCardText" Text="Second Card" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="WrapWholeWords"/>
+            </Border>
+        </Grid>
+        <Grid x:Name="BackSide" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed">
+            <Grid.RenderTransform>
+                <CompositeTransform ScaleX="-1"/>
+            </Grid.RenderTransform>
+
+            <TextBlock Text="{Binding BundleDescription}" TextWrapping="WrapWholeWords" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+    </Grid>
+</UserControl>
