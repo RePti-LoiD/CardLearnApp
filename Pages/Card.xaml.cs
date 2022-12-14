@@ -1,6 +1,5 @@
 ﻿using CardLearnApp.Data;
 using System.Collections.Generic;
-using System.ComponentModel;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
@@ -9,15 +8,39 @@ namespace CardLearnApp.Pages
 {
     public sealed partial class Card : Page
     {
-        public CardsBundleContainer CardsBundleContainer { get; set; }
+        private List<CardElement> cardElements;
 
+        public CardsBundleContainer CardsBundleContainer { get; set; }
         public Card()
         {
             InitializeComponent();
 
+            LearnButton.Click += (x, y) =>
+            {
+                cardElements[CardSlider.SelectedIndex].IsLearn = !cardElements[CardSlider.SelectedIndex].IsLearn;
+            };
+
             CardSlider.Loaded += (x, y) =>
             {
-                
+                if (CardsBundleContainer != null)
+                {
+                    cardElements = new List<CardElement>();
+
+                    foreach (CardDataContainer item in CardsBundleContainer.CardDataContainers)
+                        cardElements.Add(new CardElement() { Container = item });
+
+                    CardSlider.ItemsSource = cardElements;
+
+                    BundleNameTxt.Text = CardsBundleContainer.BundleName;
+                }
+            };
+
+            CardSlider.SelectionChanged += (x, y) =>
+            {
+                if (CardSlider.SelectedIndex < cardElements.Count && CardSlider.SelectedIndex >= 0)
+                {
+                    LearnButton.IsChecked = cardElements[CardSlider.SelectedIndex].IsLearn;
+                }
             };
         }
 
@@ -27,21 +50,11 @@ namespace CardLearnApp.Pages
 
             ConnectedAnimation anim = ConnectedAnimationService.GetForCurrentView().GetAnimation("ForwardConnectedAnimation");
             if (anim != null)
-            {
                 anim.TryStart(CardSlider);
-            }
 
-            if (e.Parameter is CardsBundleElement element)
+            if (e.Parameter is CardsBundleContainer element)
             {
-                CardsBundleContainer = element.Container;
-
-                List<CardElement> cardElements = new List<CardElement>();
-
-                foreach (CardDataContainer item in CardsBundleContainer.CardDataContainers)
-                    cardElements.Add(new CardElement() { Container = item });
-
-                CardSlider.ItemsSource = cardElements;
-                throw new System.SystemException();
+                CardsBundleContainer = element;
             }
         }
 

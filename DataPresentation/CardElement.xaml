@@ -19,6 +19,7 @@
                 <Grid.Projection>
                     <PlaneProjection x:Name="Proje" RotationY="0"/>
                 </Grid.Projection>
+                
                 <Border x:Name="RotatableItem" 
                         Width="800"
                         Height="500" 
@@ -50,7 +51,8 @@
                         <CompositeTransform ScaleY="1" ScaleX="-1"/>
                     </TextBlock.RenderTransform>
                 </TextBlock>
-
+                <FontIcon x:Name="Icon" Visibility="Visible" FontFamily="Segoe Fluent Icons" FontSize="30" Glyph="&#xe734;" HorizontalAlignment="Right" Margin="20" VerticalAlignment="Top"/>
+                <FontIcon x:Name="Icon2" Visibility="Collapsed" FontFamily="Segoe Fluent Icons" FontSize="30" Glyph="&#xe735;" HorizontalAlignment="Right" Margin="20" VerticalAlignment="Top"/>
             </Grid>
         </Grid>
     </Grid>

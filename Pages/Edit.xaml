@@ -8,6 +8,41 @@
     mc:Ignorable="d">
 
     <Grid>
-        <TextBlock Text="Edit Page" FontSize="50" FontFamily="Segoe MDL2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Padding="20" Grid.Row="0">
+            <Pivot Title="Create Bundle">
+                <PivotItem Header="Basic Info" Margin="20">
+                    <StackPanel>
+                        <TextBox Header="Bundle Name:" Margin="20" PlaceholderText="Name" MaxLength="20" HorizontalAlignment="Left" Width="200"/>
+
+                        <RichEditBox Width="500" Height="200" HorizontalAlignment="Left" Margin="20" Header="Bundle Description"/>
+
+                        <DatePicker Header="Deadline" Margin="20" MonthFormat="{}{month.full}" DayFormat="{}{day.integer(2)}"/>
+                    </StackPanel>
+                </PivotItem>
+                
+                <PivotItem Header="Cards">
+                    <StackPanel>
+                        <ListView x:Name="NodeList">
+                            
+                        </ListView>
+                    </StackPanel>
+                </PivotItem>
+            </Pivot>
+        </StackPanel>
+
+        <Border Grid.Row="1" Background="{StaticResource SystemControlBaseLowAcrylicWindowBrush}"/>
+
+        <Button Click="SaveButtonClicked" Margin="20" Grid.Row="1" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Save Bundle" Margin="0, 0, 10, 0"/>
+                <FontIcon Glyph="&#xE74E;"/>
+            </StackPanel>
+        </Button>
+        <TextBlock Text="Bundle Info" Grid.Row="1" HorizontalAlignment="Left" Margin="20" VerticalAlignment="Center" FontSize="30"/>
     </Grid>
 </Page>

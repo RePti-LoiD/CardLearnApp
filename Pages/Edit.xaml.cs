@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using CardLearnApp.Data;
+using Windows.UI.Xaml.Controls;
 
 namespace CardLearnApp.Pages
 {
@@ -7,6 +8,11 @@ namespace CardLearnApp.Pages
         public Edit()
         {
             InitializeComponent();
+        }
+
+        private void SaveButtonClicked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            MainDataSaveHandler.SaveAllData();
         }
     }
 }
