@@ -5,7 +5,7 @@ namespace CardLearnApp.Data
 {
     public static class Tool
     {
-        public static void Shuffle<T>(this IList<T> list)
+        public static void Shuffle<T>(this List<T> list)
         {
             Random rng = new Random();
 

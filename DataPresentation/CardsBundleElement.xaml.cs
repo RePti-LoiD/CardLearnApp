@@ -1,4 +1,5 @@
-﻿using CardLearnApp.Pages;
+﻿using CardLearnApp.Data.TestData;
+using CardLearnApp.Pages;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -50,7 +51,6 @@ namespace CardLearnApp.Data
             isFrontSide = !isFrontSide;
 
             FrontSide.Visibility = (Visibility)Convert.ToInt32(isFrontSide);
-            BackSide.Visibility = (Visibility)Convert.ToInt32(!isFrontSide);
 
             Storyboard storyboard = new Storyboard();
             DoubleAnimation animation = new DoubleAnimation
@@ -75,6 +75,11 @@ namespace CardLearnApp.Data
         private void OpenButtonClicked(object sender, RoutedEventArgs e)
         {
             MainPage.Instance.NavigateFrame(nameof(Card), Container);
+        }
+
+        private void TestClicked(object sender, RoutedEventArgs e)
+        {
+            MainPage.Instance.NavigateFrame(nameof(Test), TestGenerator.GenerateTest(Container));
         }
     }
 }

@@ -21,7 +21,7 @@
         <TextBlock x:Name="BundleNameTxt" Text="{Binding BundleName}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
         <ScrollViewer Grid.Row="1">
             <StackPanel>
-                <muxc:ProgressBar x:Name="Progress" Width="450" Margin="20" IsIndeterminate="False"/>
+                <muxc:ProgressBar x:Name="Progress"/>
                 <FlipView MaxWidth="820" 
                           Height="700" 
                           x:Name="CardSlider" 

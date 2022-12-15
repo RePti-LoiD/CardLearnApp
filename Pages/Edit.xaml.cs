@@ -14,13 +14,15 @@ namespace CardLearnApp.Pages
 
         private ObservableCollection<CardEditorNode> nodes = new ObservableCollection<CardEditorNode>();
 
+        private bool bundleRecieve;
+
         public Edit()
         {
             InitializeComponent();
 
             Loaded += (x, y) =>
             {
-                if (dataContainer != null)
+                if (dataContainer != null && dataContainer.CardDataContainers != null)
                 {
                     foreach (CardDataContainer item in dataContainer.CardDataContainers)
                     {
@@ -40,20 +42,45 @@ namespace CardLearnApp.Pages
 
         private void SaveButtonClicked(object sender, RoutedEventArgs e)
         {
+            if (bundleRecieve)
+            {
+                SaveCurrentData();
+            }
+            else
+            {
+                MainDataContainer mainDataContainer = MainDataContainer.Initialize();
+                mainDataContainer.Bundles.Add(new CardsBundleContainer() 
+                { 
+                    CardDataContainers = GetContainers(nodes), 
+                    BundleDescription = BundleDescriptionTextBox.Text,
+                    BundleName = BundleNameTextBox.Text
+                });
+
+                MainDataSaveHandler.SaveAllData();
+            }
+        }
+
+        private void SaveCurrentData()
+        {
             MainDataContainer mainDataContainer = MainDataContainer.Initialize();
 
             int index = mainDataContainer.Bundles.IndexOf(dataContainer);
 
-            List<CardDataContainer> cardDataContainers = new List<CardDataContainer>();
-
-            foreach (CardEditorNode item in nodes)
-                cardDataContainers.Add(item.DataContainer);
-
-            mainDataContainer.Bundles[index].CardDataContainers = cardDataContainers;
+            mainDataContainer.Bundles[index].CardDataContainers = GetContainers(nodes);
             mainDataContainer.Bundles[index].BundleName = BundleNameTextBox.Text;
             mainDataContainer.Bundles[index].BundleDescription = BundleDescriptionTextBox.Text;
 
             MainDataSaveHandler.SaveAllData();
+        }
+
+        private List<CardDataContainer> GetContainers(ObservableCollection<CardEditorNode> cardDataContainers)
+        {
+            List<CardDataContainer> bundleContainer = new List<CardDataContainer>();
+
+            foreach (CardEditorNode item in cardDataContainers)
+                bundleContainer.Add(item.DataContainer);
+
+            return bundleContainer;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -68,10 +95,14 @@ namespace CardLearnApp.Pages
                 BundleDescriptionTextBox.Text = cardsBundle.BundleDescription;
 
                 dataContainer = cardsBundle;
+
+                bundleRecieve = true;
             }
             else
             {
                 dataContainer = new CardsBundleContainer();
+
+                bundleRecieve = false;
             }
         }
 

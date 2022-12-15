@@ -19,12 +19,19 @@
                 <Grid.Projection>
                     <PlaneProjection x:Name="Proje" RotationY="0"/>
                 </Grid.Projection>
-                
+
                 <Border x:Name="RotatableItem" 
                         Width="800"
-                        Height="500" 
-                        Background="{ThemeResource SystemControlBaseLowAcrylicWindowBrush}" 
-                        CornerRadius="20"/>
+                        Height="500"
+                        CornerRadius="20">
+
+                    <Border.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Offset="0" Color="#FFEDF59F"/>
+                            <GradientStop Offset="1" Color="#FFFFB616"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
 
                 <TextBlock Visibility="Visible"
                            Width="700"
@@ -33,6 +40,7 @@
                            Text="{Binding FrontSideText}" 
                            TextWrapping="WrapWholeWords"
                            FontSize="50" 
+                           Foreground="Black"
                            FontFamily="Segoe MDL2" 
                            HorizontalAlignment="Center" 
                            VerticalAlignment="Center"/>
@@ -45,6 +53,7 @@
                            TextWrapping="WrapWholeWords"
                            HorizontalAlignment="Center"
                            FontFamily="Segoe MDL2"
+                           Foreground="Black"
                            VerticalAlignment="Center" 
                            RenderTransformOrigin="0.5,0.5">
                     <TextBlock.RenderTransform>

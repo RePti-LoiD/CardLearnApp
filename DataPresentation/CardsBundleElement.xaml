@@ -23,6 +23,7 @@
                     <MenuFlyoutSeparator/>
 
                     <MenuFlyoutItem Click="EditButtonClicked" Text="Edit" Icon="Edit"/>
+                    <MenuFlyoutItem Click="TestClicked" Text="Test"/>
                 </MenuFlyout>
             </Grid.ContextFlyout>
             <Border KeyDown="Grid_KeyDown" Background="{StaticResource SystemControlBaseLowAcrylicWindowBrush}" CornerRadius="20"/>
@@ -42,13 +43,6 @@
                 </Border.RenderTransform>
                 <TextBlock x:Name="SCardText" Text="Second Card" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="WrapWholeWords"/>
             </Border>
-        </Grid>
-        <Grid x:Name="BackSide" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed">
-            <Grid.RenderTransform>
-                <CompositeTransform ScaleX="-1"/>
-            </Grid.RenderTransform>
-
-            <TextBlock Text="{Binding BundleDescription}" TextWrapping="WrapWholeWords" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
     </Grid>
 </UserControl>

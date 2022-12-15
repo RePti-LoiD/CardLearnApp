@@ -9,7 +9,7 @@
     d:DesignHeight="200"
     d:DesignWidth="300">
 
-    <StackPanel Background="{StaticResource SystemControlBackgroundBaseLowRevealBackgroundBrush}" CornerRadius="5" Margin="10">
+    <StackPanel Background="{StaticResource SystemAccentColorDark1}" CornerRadius="5" Margin="10">
         <StackPanel.ContextFlyout>
             <MenuFlyout>
                 <MenuFlyoutItem Click="RemoveSelfClicked" Text="Remove"/>

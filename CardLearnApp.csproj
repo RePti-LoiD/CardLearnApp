@@ -134,13 +134,17 @@
     <Compile Include="DataPresentation\CardsBundleElement.xaml.cs">
       <DependentUpon>CardsBundleElement.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data\CardDataContainer.cs" />
+    <Compile Include="Data\CardData\CardDataContainer.cs" />
     <Compile Include="DataPresentation\CardElement.xaml.cs">
       <DependentUpon>CardElement.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data\CardsBundleContainer.cs" />
+    <Compile Include="Data\CardData\CardsBundleContainer.cs" />
     <Compile Include="Data\MainDataContainer.cs" />
     <Compile Include="Data\MainDataSaveHandler.cs" />
+    <Compile Include="Data\TestData\TestAnswer.cs" />
+    <Compile Include="Data\TestData\TestDataContainer.cs" />
+    <Compile Include="Data\TestData\TestGenerator.cs" />
+    <Compile Include="Data\TestData\TestQuestion.cs" />
     <Compile Include="Data\Tool.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
