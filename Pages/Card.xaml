@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CardLearnApp.Pages"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -20,14 +21,15 @@
         <TextBlock x:Name="BundleNameTxt" Text="{Binding BundleName}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
         <ScrollViewer Grid.Row="1">
             <StackPanel>
+                <muxc:ProgressBar x:Name="Progress" Width="450" Margin="20" IsIndeterminate="False"/>
                 <FlipView MaxWidth="820" 
                           Height="700" 
                           x:Name="CardSlider" 
                           Background="Transparent"
                           VerticalAlignment="Top"/>
                 <ToggleButton Content="Learned" Margin="20" HorizontalAlignment="Center" x:Name="LearnButton"/>
-                <Grid CornerRadius="10" Background="#FF373737" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Text="{Binding BundleDescription}" HorizontalAlignment="Center" TextWrapping="WrapWholeWords" Width="800"/>
+                <Grid CornerRadius="10" Background="#FF373737" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
+                    <TextBlock x:Name="BundleDesc" HorizontalAlignment="Center" TextWrapping="WrapWholeWords" Margin="20" Width="800"/>
                 </Grid>
             </StackPanel>
         </ScrollViewer>

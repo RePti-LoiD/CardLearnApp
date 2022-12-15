@@ -31,6 +31,8 @@ namespace CardLearnApp.Data
         public void SetNewElement(CardDataContainer cardDataContainer) => 
             cardDataContainers.Add(cardDataContainer);
 
+        public CardsBundleContainer() { }
+
         public CardsBundleContainer(List<CardDataContainer> cardDataContainers)
         {
             this.cardDataContainers = new List<CardDataContainer>();

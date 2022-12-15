@@ -29,6 +29,8 @@ namespace CardLearnApp.Pages
 
         public PlaneProjection planeProjection;
 
+        public CardDataContainer() { }
+
         public CardDataContainer(string frontSide, string backSide)
         {
             frontSideText = frontSide;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CardLearnApp.Pages;
+using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -64,6 +65,16 @@ namespace CardLearnApp.Data
             storyboard.Children.Clear();
             storyboard.Children.Add(animation);
             storyboard.Begin();
+        }
+
+        private void EditButtonClicked(object sender, RoutedEventArgs e)
+        {
+            MainPage.Instance.NavigateFrame(nameof(Edit), Container);
+        }
+
+        private void OpenButtonClicked(object sender, RoutedEventArgs e)
+        {
+            MainPage.Instance.NavigateFrame(nameof(Card), Container);
         }
     }
 }

@@ -1,27 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
+﻿using CardLearnApp.Pages;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
-// Документацию по шаблону элемента "Пользовательский элемент управления" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace CardLearnApp.DataPresentation
 {
     public sealed partial class CardEditorNode : UserControl
     {
+        public delegate void RemoveSelf(CardEditorNode cardEditorNode);
+        private event RemoveSelf onRemoveSelf;
+
+        public event RemoveSelf OnRemoveSelf
+        {
+            add
+            {
+                onRemoveSelf += value;
+            }
+            remove
+            {
+                onRemoveSelf -= value;
+            }
+        }
+
+        private CardDataContainer dataContainer;
+        
+        public CardDataContainer DataContainer { get => dataContainer; set => dataContainer = value; }
+
         public CardEditorNode()
         {
-            this.InitializeComponent();
+            InitializeComponent();
+
+            Loaded += (x, y) => 
+            {
+                FrontSide.Text = DataContainer.FrontSideText != string.Empty ? DataContainer.FrontSideText : "Front";
+                BackSide.Text = DataContainer.BackSideText != string.Empty ? DataContainer.BackSideText : "Back";
+            };
+        }
+
+        private void FrontSideTextChanged(object sender, TextChangedEventArgs e)
+        {
+            dataContainer.FrontSideText = FrontSide.Text;
+        }
+
+        private void BackSideTextChanged(object sender, TextChangedEventArgs e)
+        {
+            dataContainer.BackSideText = BackSide.Text;
+        }
+
+        private void RemoveSelfClicked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            onRemoveSelf?.Invoke(this);
         }
     }
 }

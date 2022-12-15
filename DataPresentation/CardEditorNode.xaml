@@ -9,8 +9,13 @@
     d:DesignHeight="200"
     d:DesignWidth="300">
 
-    <StackPanel Background="{StaticResource SystemControlBackgroundBaseLowRevealBackgroundBrush}" CornerRadius="10">
-        <TextBox HorizontalAlignment="Left" Width="200" Height="70" Header="Front Side" VerticalAlignment="Top" Margin="10"/>
-        <TextBox HorizontalAlignment="Left" Width="200" Height="70" Header="Back Side" VerticalAlignment="Top" Margin="10"/>
+    <StackPanel Background="{StaticResource SystemControlBackgroundBaseLowRevealBackgroundBrush}" CornerRadius="5" Margin="10">
+        <StackPanel.ContextFlyout>
+            <MenuFlyout>
+                <MenuFlyoutItem Click="RemoveSelfClicked" Text="Remove"/>
+            </MenuFlyout>
+        </StackPanel.ContextFlyout>
+        <TextBox x:Name="FrontSide" HorizontalAlignment="Left" Width="250" Header="Front Side" VerticalAlignment="Top" Margin="10" TextChanged="FrontSideTextChanged"/>
+        <TextBox x:Name="BackSide" HorizontalAlignment="Left" Width="250" Header="Back Side" VerticalAlignment="Top" Margin="10" TextChanged="BackSideTextChanged"/>
     </StackPanel>
 </UserControl>

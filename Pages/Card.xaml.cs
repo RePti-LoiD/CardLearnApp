@@ -32,6 +32,7 @@ namespace CardLearnApp.Pages
                     CardSlider.ItemsSource = cardElements;
 
                     BundleNameTxt.Text = CardsBundleContainer.BundleName;
+                    BundleDesc.Text = CardsBundleContainer.BundleDescription;
                 }
             };
 
@@ -40,6 +41,8 @@ namespace CardLearnApp.Pages
                 if (CardSlider.SelectedIndex < cardElements.Count && CardSlider.SelectedIndex >= 0)
                 {
                     LearnButton.IsChecked = cardElements[CardSlider.SelectedIndex].IsLearn;
+
+                    Progress.Value = CardSlider.SelectedIndex * 100 / (cardElements.Count - 1);
                 }
             };
         }

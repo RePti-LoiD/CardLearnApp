@@ -13,7 +13,18 @@
             <PlaneProjection x:Name="Proje"/>
         </Grid.Projection>
         <Grid x:Name="FrontSide">
-            
+            <Grid.ContextFlyout>
+                <MenuFlyout>
+                    <MenuFlyoutItem Text="Open" Click="OpenButtonClicked">
+                        <MenuFlyoutItem.Icon>
+                            <FontIcon Glyph="&#xE8A7;"/>
+                        </MenuFlyoutItem.Icon>
+                    </MenuFlyoutItem>
+                    <MenuFlyoutSeparator/>
+
+                    <MenuFlyoutItem Click="EditButtonClicked" Text="Edit" Icon="Edit"/>
+                </MenuFlyout>
+            </Grid.ContextFlyout>
             <Border KeyDown="Grid_KeyDown" Background="{StaticResource SystemControlBaseLowAcrylicWindowBrush}" CornerRadius="20"/>
             <TextBlock x:Name="BundleTitle" Text="{Binding BundleName}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 20" FontSize="20"/>
             <Border Visibility="Collapsed" x:Name="Card1" Width="180" Height="100" CornerRadius="10" RenderTransformOrigin="0.5,0.5" Margin="51,124,19,76" UseLayoutRounding="False" d:LayoutRounding="Auto" Background="{StaticResource SystemControlAcrylicElementBrush}">
