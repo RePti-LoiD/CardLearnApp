@@ -31,7 +31,7 @@ namespace CardLearnApp.Data.TestData
                     {
                         index = random.Next(0, cardsBundleContainer.CardDataContainers.Count - 1);
                     }
-                    while (IndexContains(selectedIndexes, index));
+                    while (IndexContains(selectedIndexes, index) && CompareAnswers(question.Answers[0], new TestAnswer(cardsBundleContainer.CardDataContainers[index].BackSideText, false)));
                     selectedIndexes[i] = index;
                 }
 
@@ -54,5 +54,7 @@ namespace CardLearnApp.Data.TestData
 
             return false;
         }
+
+        private static bool CompareAnswers(TestAnswer firstAnswer, TestAnswer nextAnswer) => !firstAnswer.Equals(nextAnswer);
     }
 }

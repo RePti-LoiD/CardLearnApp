@@ -71,10 +71,30 @@
                             </Storyboard>
                         </Grid.Resources>
 
-                        <Button Click="AnswerButtonClicked" Height="175" Width="305" x:Name="Answer1" Background="Transparent" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="A" FontSize="25"/>
-                        <Button Click="AnswerButtonClicked" Height="175" Width="305" x:Name="Answer2" Background="Transparent" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="B" FontSize="25"/>
-                        <Button Click="AnswerButtonClicked" Height="175" Width="305" x:Name="Answer3" Background="Transparent" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="C" FontSize="25"/>
-                        <Button Click="AnswerButtonClicked" Height="175" Width="305" x:Name="Answer4" Background="Transparent" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="D" FontSize="25"/>
+                        <Button Click="AnswerButtonClicked" Height="175" Width="305" x:Name="Answer1" Background="Transparent" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid>
+                                <TextBlock x:Name="Answer1Text" Width="290" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="A" FontSize="25" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Text="A" FontSize="200"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#192B2B2B"/>
+                            </Grid>
+                        </Button>
+                        <Button Click="AnswerButtonClicked" Height="175" Width="305" x:Name="Answer2" Background="Transparent" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid>
+                                <TextBlock x:Name="Answer2Text" Width="290" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="B" FontSize="25" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Text="B" FontSize="200"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#192B2B2B"/>
+                            </Grid>
+                        </Button>
+                        <Button Click="AnswerButtonClicked" Height="175" Width="305" x:Name="Answer3" Background="Transparent" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid>
+                                <TextBlock x:Name="Answer3Text" Width="290" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="C" FontSize="25" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Text="C" FontSize="200"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#192B2B2B"/>
+                            </Grid>
+                        </Button>
+                        <Button Click="AnswerButtonClicked" Height="175" Width="305" x:Name="Answer4" Background="Transparent" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid>
+                                <TextBlock x:Name="Answer4Text" Width="290" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="D" FontSize="25" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Text="D" FontSize="200"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#192B2B2B"/>
+                            </Grid>
+                        </Button>
                     </Grid>
                 </Border>
                 <Border Background="#FF373737" Width="600" Height="50" Margin="20" CornerRadius="10">

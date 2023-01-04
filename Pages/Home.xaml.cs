@@ -1,5 +1,8 @@
 ﻿using CardLearnApp.Data;
+using CardLearnApp.Data.DayManipulations;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
@@ -26,6 +29,8 @@ namespace CardLearnApp.Pages
                 }
 
                 BasicGridView.ItemsSource = cardsArrayContainers;
+
+                WelcomeText.Text = DayInterpreter.GetDayJoke();
             };
 
         }
@@ -52,7 +57,6 @@ namespace CardLearnApp.Pages
         {
             (e.ClickedItem as CardsBundleElement).OnCardClick();
 
-            WelcomeText.Text = (e.ClickedItem as CardsBundleElement).Container.CardDataContainers.Count.ToString();
             MainPage.Instance.NavigateFrame("Card", (e.ClickedItem as CardsBundleElement).Container);
         }
     }

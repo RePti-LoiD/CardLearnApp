@@ -1,7 +1,6 @@
 ﻿using CardLearnApp.Data.TestData;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
@@ -32,7 +31,7 @@ namespace CardLearnApp.Pages
             if (e.Parameter is TestDataContainer && (e.Parameter as TestDataContainer).Questions.Count > 0)
             {
                 testQuestions = (e.Parameter as TestDataContainer).Questions;
-                CheckAnswer(testQuestions[0], null);
+                ChangeData(0, neutral);
             }
         }
 
@@ -96,10 +95,10 @@ namespace CardLearnApp.Pages
         {
             FrontSide.Text = testQuestions[index].QuestionTitle;
 
-            Answer1.Content = testQuestions[index].Answers[0].AnswerTitle;
-            Answer2.Content = testQuestions[index].Answers[1].AnswerTitle;
-            Answer3.Content = testQuestions[index].Answers[2].AnswerTitle;
-            Answer4.Content = testQuestions[index].Answers[3].AnswerTitle;
+            Answer1Text.Text = testQuestions[index].Answers[0].AnswerTitle;
+            Answer2Text.Text = testQuestions[index].Answers[1].AnswerTitle;
+            Answer3Text.Text = testQuestions[index].Answers[2].AnswerTitle;
+            Answer4Text.Text = testQuestions[index].Answers[3].AnswerTitle;
 
             Progress.Value = index * 100 / (testQuestions.Count - 1);
 

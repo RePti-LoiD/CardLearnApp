@@ -139,6 +139,7 @@
       <DependentUpon>CardElement.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\CardData\CardsBundleContainer.cs" />
+    <Compile Include="Data\DayManipulations\DayInterpreter.cs" />
     <Compile Include="Data\MainDataContainer.cs" />
     <Compile Include="Data\MainDataSaveHandler.cs" />
     <Compile Include="Data\TestData\TestAnswer.cs" />

@@ -16,5 +16,17 @@
             this.answerTitle = answerTitle;
             this.isCorrect = isCorrect;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is TestAnswer answer)
+            {
+                if (answer.AnswerTitle == this.AnswerTitle)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
