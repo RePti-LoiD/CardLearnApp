@@ -11,11 +11,11 @@ namespace CardLearnApp
         public static MainPage Instance { get => mainPage; private set => mainPage = value; }
 
         public string CurrentPageName { get => currentPageName;
-            private set 
+            private set
             {
                 currentPageName = value;
                 MainNav.PaneTitle = value;
-            } 
+            }
         }
 
         public MainPage()
@@ -31,20 +31,12 @@ namespace CardLearnApp
         private void Main_SelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs args)
         {
             if (!args.IsSettingsSelected)
-                NavigatePageByName((args.SelectedItem as Microsoft.UI.Xaml.Controls.NavigationViewItem).Tag.ToString());
-        }
-
-        private void NavigatePageByName(string name)
-        {
-            string type = $"{nameof(CardLearnApp)}.{nameof(Pages)}.{name}";
-
-            MainFrame.Navigate(Type.GetType(type));
-            MainNav.PaneTitle = name;
+                NavigateFrame((args.SelectedItem as Microsoft.UI.Xaml.Controls.NavigationViewItem).Tag.ToString(), null);
         }
 
         private void MainFrame_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            NavigatePageByName("Home");
+            NavigateFrame("Home", null);
         }
 
         public void NavigateFrame(string name, object data)

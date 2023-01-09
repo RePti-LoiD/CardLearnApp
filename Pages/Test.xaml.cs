@@ -16,6 +16,13 @@ namespace CardLearnApp.Pages
         public Test()
         {
             InitializeComponent();
+
+            Loaded += (x, y) =>
+            {
+                if (testQuestions.Count == 0)
+                    MainGrid.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                else ReturnGrid.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            };
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -105,6 +112,11 @@ namespace CardLearnApp.Pages
             CheckAnswer(testQuestions[index], testQuestions[index].LastAnswer);
 
             anim.Begin();
+        }
+
+        private void ReturnToMain(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            MainPage.Instance.NavigateFrame("Home", null);
         }
     }
 }

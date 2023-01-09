@@ -1,8 +1,6 @@
 ﻿using CardLearnApp.Data;
 using CardLearnApp.Data.DayManipulations;
-using System;
 using System.Collections.Generic;
-using System.Globalization;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
@@ -32,7 +30,6 @@ namespace CardLearnApp.Pages
 
                 WelcomeText.Text = DayInterpreter.GetDayJoke();
             };
-
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

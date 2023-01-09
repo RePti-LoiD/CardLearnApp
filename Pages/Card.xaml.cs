@@ -15,11 +15,6 @@ namespace CardLearnApp.Pages
         {
             InitializeComponent();
 
-            LearnButton.Click += (x, y) =>
-            {
-                cardElements[CardSlider.SelectedIndex].IsLearn = !cardElements[CardSlider.SelectedIndex].IsLearn;
-            };
-
             CardSlider.Loaded += (x, y) =>
             {
                 if (CardsBundleContainer != null)
@@ -33,16 +28,31 @@ namespace CardLearnApp.Pages
 
                     BundleNameTxt.Text = CardsBundleContainer.BundleName;
                     BundleDesc.Text = CardsBundleContainer.BundleDescription;
+
+
+                    LearnButton.Click += (x1, y1) =>
+                    {
+                        cardElements[CardSlider.SelectedIndex].IsLearn = !cardElements[CardSlider.SelectedIndex].IsLearn;
+                    };
+
+
+
+                    CardSlider.SelectionChanged += (x2, y2) =>
+                    {
+                        if (CardSlider.SelectedIndex < cardElements.Count && CardSlider.SelectedIndex >= 0)
+                        {
+                            LearnButton.IsChecked = cardElements[CardSlider.SelectedIndex].IsLearn;
+
+                            Progress.Value = CardSlider.SelectedIndex * 100 / (cardElements.Count - 1);
+                        }
+                    };
+
+                    ReturnGrid.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                 }
-            };
 
-            CardSlider.SelectionChanged += (x, y) =>
-            {
-                if (CardSlider.SelectedIndex < cardElements.Count && CardSlider.SelectedIndex >= 0)
+                else
                 {
-                    LearnButton.IsChecked = cardElements[CardSlider.SelectedIndex].IsLearn;
-
-                    Progress.Value = CardSlider.SelectedIndex * 100 / (cardElements.Count - 1);
+                    MainGrid.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                 }
             };
         }
@@ -64,7 +74,12 @@ namespace CardLearnApp.Pages
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-            ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("ForwardConnectedAnimation", CardSlider);
+            ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("ForwardConnectedAnimation", Icon);
+        }
+
+        private void ReturnToMain(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            MainPage.Instance.NavigateFrame("Home", null);
         }
     }
 }

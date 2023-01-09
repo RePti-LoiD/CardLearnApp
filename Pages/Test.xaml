@@ -14,7 +14,17 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <FontIcon x:Name="Icon" FontFamily="Segoe Fluent Icons" Glyph="&#xe7ac;" FontSize="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20"/>
-        <ScrollViewer>
+
+        <Grid Grid.Row="0" x:Name="ReturnGrid" Visibility="Visible">
+            <Grid>
+                <Button CornerRadius="20" Click="ReturnToMain" FontSize="25" FontWeight="Bold" Height="250" Width="250" Content="Select Test" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.ZIndex="1"/>
+                <Grid Opacity="0.1">
+                    <FontIcon Glyph="&#xE8A7;" FontSize="150"/>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <ScrollViewer x:Name="MainGrid">
             <StackPanel>
                 <muxc:ProgressBar x:Name="Progress" Value="0"/>
 
