@@ -28,7 +28,7 @@
             <StackPanel>
                 <muxc:ProgressBar x:Name="Progress" Value="0"/>
 
-                <Border Width="600" Height="350" Margin="0, 100, 0, 0" Background="{ThemeResource SystemControlBaseLowAcrylicWindowBrush}" CornerRadius="10" RenderTransformOrigin="0.5,0.5">
+                <Border Width="600" Height="350" Margin="0, 100, 0, 0" Background="Transparent" CornerRadius="10" RenderTransformOrigin="0.5,0.5">
                     <Border.RenderTransform>
                         <CompositeTransform x:Name="Translation"/>
                     </Border.RenderTransform>
