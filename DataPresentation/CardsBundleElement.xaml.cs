@@ -5,6 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Animation;
+using static CardLearnApp.Data.CardsBundleElement;
 
 namespace CardLearnApp.Data
 {
@@ -14,6 +15,9 @@ namespace CardLearnApp.Data
         private bool isFrontSide;
 
         public CardsBundleContainer Container;
+
+        public delegate void BundleOpen(UIElement sener);
+        public event BundleOpen OnBundleOpen;
 
         public CardsBundleElement(CardsBundleContainer container)
         {
@@ -40,17 +44,13 @@ namespace CardLearnApp.Data
             };
         }
 
-        private void Grid_KeyDown(object sender, KeyRoutedEventArgs e)
-        {
-            OnCardClick();
-        }
-
         public void OnCardClick()
         {
             angle += 180;
             isFrontSide = !isFrontSide;
 
             FrontSide.Visibility = (Visibility)Convert.ToInt32(isFrontSide);
+            BackSide.Visibility = (Visibility)Convert.ToInt32(!isFrontSide);
 
             Storyboard storyboard = new Storyboard();
             DoubleAnimation animation = new DoubleAnimation
@@ -69,17 +69,28 @@ namespace CardLearnApp.Data
 
         private void EditButtonClicked(object sender, RoutedEventArgs e)
         {
+            OnBundleOpen?.Invoke(this);
+
             MainPage.Instance.NavigateFrame(nameof(Edit), Container);
         }
 
         private void OpenButtonClicked(object sender, RoutedEventArgs e)
         {
+            OnBundleOpen?.Invoke(this);
+
             MainPage.Instance.NavigateFrame(nameof(Card), Container);
         }
 
         private void TestClicked(object sender, RoutedEventArgs e)
         {
+            OnBundleOpen?.Invoke(this);
+
             MainPage.Instance.NavigateFrame(nameof(Test), TestGenerator.GenerateTest(Container));
+        }
+
+        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            OnCardClick();
         }
     }
 }

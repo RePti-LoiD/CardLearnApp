@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml.Media;
+﻿using System;
+using Windows.UI.Xaml.Media;
 
 namespace CardLearnApp.Pages
 {
@@ -27,6 +28,7 @@ namespace CardLearnApp.Pages
             set { isFrontSide = value;}
         }
 
+        [NonSerialized]
         public PlaneProjection planeProjection;
 
         public CardDataContainer() { }

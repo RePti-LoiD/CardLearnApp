@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 namespace CardLearnApp.Pages
@@ -34,6 +35,9 @@ namespace CardLearnApp.Pages
 
                         nodes.Add(cardEditorNode);
                     }
+
+                    DeadlineDate.Date = dataContainer.DeadLine.Date;
+                    MainPivot.Title = dataContainer.DeadLine.Date;
                 }
 
                 NodeList.ItemsSource = nodes;
@@ -104,6 +108,19 @@ namespace CardLearnApp.Pages
 
                 bundleRecieve = false;
             }
+
+            ConnectedAnimation anim = ConnectedAnimationService.GetForCurrentView().GetAnimation("ForwardConnectedAnimation");
+            if (anim != null)
+            {
+                anim.TryStart(MainPivot);
+            }
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("ForwardConnectedAnimation", MainPivot);
         }
 
         private void DeleteButtonClicked(object sender, RoutedEventArgs e)
@@ -130,6 +147,16 @@ namespace CardLearnApp.Pages
 
             NodeList.ItemsSource = nodes;
             NodeList.CompleteViewChange();
+        }
+
+        private void DeadlineTimeChange(DatePicker sender, DatePickerSelectedValueChangedEventArgs args)
+        {
+            dataContainer.DeadLine = sender.Date;
+        }
+
+        private void DeadlineTimeLoaded(object sender, RoutedEventArgs e)
+        {
+            (sender as DatePicker).Date = dataContainer.DeadLine;
         }
     }
 }

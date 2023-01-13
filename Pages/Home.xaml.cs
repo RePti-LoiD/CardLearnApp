@@ -1,6 +1,7 @@
 ﻿using CardLearnApp.Data;
 using CardLearnApp.Data.DayManipulations;
 using System.Collections.Generic;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
@@ -11,19 +12,29 @@ namespace CardLearnApp.Pages
     {
         private List<CardsBundleElement> cardsArrayContainers = new List<CardsBundleElement>();
 
+        private UIElement navObj;
+
         public Home()
         {
             InitializeComponent();
 
             BasicGridView.Loaded += (x, y) =>
             {
+                navObj = Icon;
+
                 MainDataSaveHandler.RestoreData();
 
                 MainDataContainer mainDataContainer = MainDataContainer.Initialize();
 
                 foreach (CardsBundleContainer card in mainDataContainer.Bundles)
                 {
-                    cardsArrayContainers.Add(new CardsBundleElement(card));
+                    CardsBundleElement cardsBundleElement = new CardsBundleElement(card);
+                    cardsBundleElement.OnBundleOpen += (nav) =>
+                    {
+                        navObj = nav;
+                    };
+
+                    cardsArrayContainers.Add(cardsBundleElement);
                 }
 
                 BasicGridView.ItemsSource = cardsArrayContainers;
@@ -47,14 +58,7 @@ namespace CardLearnApp.Pages
         {
             base.OnNavigatedFrom(e);
 
-            ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("ForwardConnectedAnimation", Icon);
-        }
-
-        private void ItemClicked(object sender, ItemClickEventArgs e)
-        {
-            (e.ClickedItem as CardsBundleElement).OnCardClick();
-
-            MainPage.Instance.NavigateFrame("Card", (e.ClickedItem as CardsBundleElement).Container);
+            ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("ForwardConnectedAnimation", navObj);
         }
     }
 }

@@ -29,6 +29,7 @@ namespace CardLearnApp
         public App()
         {
             this.InitializeComponent();
+
             this.Suspending += OnSuspending;
         }
 
@@ -40,7 +41,7 @@ namespace CardLearnApp
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
-
+            
             // Не повторяйте инициализацию приложения, если в окне уже имеется содержимое,
             // только обеспечьте активность окна
             if (rootFrame == null)

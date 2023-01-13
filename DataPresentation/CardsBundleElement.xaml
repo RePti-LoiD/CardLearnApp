@@ -5,44 +5,94 @@
     xmlns:local="using:CardLearnApp.Data"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="Transparent">
+    mc:Ignorable="d" 
+    Width="250" 
+    Height="300">
 
-    <Grid Width="250" Height="300">
+    <Grid x:Name="MainGrid" Width="250" Height="300" Background="#1e1e1e" Tapped="Grid_Tapped" CornerRadius="15">
         <Grid.Projection>
             <PlaneProjection x:Name="Proje"/>
         </Grid.Projection>
-        <Grid x:Name="FrontSide">
-            <Grid.ContextFlyout>
-                <MenuFlyout>
-                    <MenuFlyoutItem Text="Open" Click="OpenButtonClicked">
-                        <MenuFlyoutItem.Icon>
-                            <FontIcon Glyph="&#xE8A7;"/>
-                        </MenuFlyoutItem.Icon>
-                    </MenuFlyoutItem>
-                    <MenuFlyoutSeparator/>
 
-                    <MenuFlyoutItem Click="EditButtonClicked" Text="Edit" Icon="Edit"/>
-                    <MenuFlyoutItem Click="TestClicked" Text="Test"/>
-                </MenuFlyout>
-            </Grid.ContextFlyout>
-            <Border KeyDown="Grid_KeyDown" Background="{StaticResource SystemControlBaseLowAcrylicWindowBrush}" CornerRadius="20"/>
+
+        <Grid.ContextFlyout>
+            <MenuFlyout>
+                <MenuFlyoutItem Text="Open" Click="OpenButtonClicked">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xE8A7;"/>
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+                <MenuFlyoutSeparator/>
+
+                <MenuFlyoutItem Click="EditButtonClicked" Text="Edit" Icon="Edit"/>
+                <MenuFlyoutItem Click="TestClicked" Text="Test"/>
+            </MenuFlyout>
+        </Grid.ContextFlyout>
+
+        <Grid x:Name="FrontSide">
             <TextBlock x:Name="BundleTitle" Text="{Binding BundleName}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 20" FontSize="20"/>
-            <Border Visibility="Collapsed" x:Name="Card1" Width="180" Height="100" CornerRadius="10" RenderTransformOrigin="0.5,0.5" Margin="51,124,19,76" UseLayoutRounding="False" d:LayoutRounding="Auto" Background="{StaticResource SystemControlAcrylicElementBrush}">
+            <Border Visibility="Visible" x:Name="Card1" Width="180" Height="100" CornerRadius="10" RenderTransformOrigin="0.5,0.5" Margin="51,124,19,76" UseLayoutRounding="False" d:LayoutRounding="Auto">
                 <Border.RenderTransform>
                     <CompositeTransform Rotation="30"/>
                 </Border.RenderTransform>
+
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Offset="0" Color="#FFEDF59F"/>
+                        <GradientStop Offset="1" Color="#FFFFB616"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+
                 <TextBlock x:Name="FCardText" Text="First Card" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="WrapWholeWords"/>
             </Border>
 
             <TextBlock x:Name="TextOnEmpty" Text="Empty Bundle" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
 
-            <Border Visibility="Collapsed" x:Name="Card2" Width="180" Height="100" CornerRadius="10" Background="{StaticResource SystemControlAcrylicElementBrush}" RenderTransformOrigin="0.5,0.5" Margin="18,178,52,22" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Border Visibility="Collapsed" x:Name="Card2" Width="180" Height="100" CornerRadius="10" RenderTransformOrigin="0.5,0.5" Margin="18,178,52,22" UseLayoutRounding="False" d:LayoutRounding="Auto">
                 <Border.RenderTransform>
                     <CompositeTransform Rotation="14"/>
                 </Border.RenderTransform>
+
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Offset="0" Color="#FFEDF59F"/>
+                        <GradientStop Offset="1" Color="#FFFFB616"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+
                 <TextBlock x:Name="SCardText" Text="Second Card" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="WrapWholeWords"/>
             </Border>
+        </Grid>
+
+        <Grid x:Name="BackSide" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1"/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="{x:Bind Container.BundleDescription}" Margin="10" FontSize="16" TextWrapping="WrapWholeWords"/>
+
+            <Grid Grid.Row="1" Margin="5" CornerRadius="10" Background="#FF252525">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Grid.Row="0" Text="Card Count: " FontWeight="Light" VerticalAlignment="Center"  Margin="5, 0, 0, 0"/>
+                    <TextBlock Grid.Row="0" Text="{x:Bind Container.CardDataContainers.Count}" FontWeight="Light" VerticalAlignment="Center" Margin="2, 0, 0, 0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" CornerRadius="10" Background="{StaticResource SystemControlAcrylicWindowBrush}">
+                    <TextBlock Text="Deadline:" Margin="5, 2, 0, 0" FontSize="14" TextWrapping="WrapWholeWords"/>
+                    <TextBlock Text="{x:Bind Container.DeadLine.LocalDateTime}" Margin="15, 0, 0, 0" FontSize="14" TextTrimming="Clip" FontWeight="Light" TextWrapping="WrapWholeWords"/>
+                </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

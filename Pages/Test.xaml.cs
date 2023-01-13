@@ -1,6 +1,7 @@
 ﻿using CardLearnApp.Data.TestData;
 using System;
 using System.Collections.Generic;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
@@ -20,8 +21,8 @@ namespace CardLearnApp.Pages
             Loaded += (x, y) =>
             {
                 if (testQuestions.Count == 0)
-                    MainGrid.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-                else ReturnGrid.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                    MainGrid.Visibility = Visibility.Collapsed;
+                else ReturnGrid.Visibility = Visibility.Collapsed;
             };
         }
 
@@ -49,29 +50,14 @@ namespace CardLearnApp.Pages
             ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("ForwardConnectedAnimation", Icon);
         }
 
-        private void AnswerButtonClicked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void AnswerButtonClicked(object sender, RoutedEventArgs e)
         {
-            if (sender.Equals(Answer1))
-            {
-                CheckAnswer(testQuestions[currentQuestion], testQuestions[currentQuestion].Answers[0]);
-            }
-            else if (sender.Equals(Answer2))
-            {
-                CheckAnswer(testQuestions[currentQuestion], testQuestions[currentQuestion].Answers[1]);
-            }
-            else if(sender.Equals(Answer3))
-            {
-                CheckAnswer(testQuestions[currentQuestion], testQuestions[currentQuestion].Answers[2]);
-            }
-            else if(sender.Equals(Answer4))
-            {
-                CheckAnswer(testQuestions[currentQuestion], testQuestions[currentQuestion].Answers[3]);
-            }
+            CheckAnswer(testQuestions[currentQuestion], testQuestions[currentQuestion].Answers[int.Parse((sender as Button).Tag.ToString())]);
         }
 
-        private void CheckAnswer(TestQuestion question, TestAnswer testAnswer)
+        private void CheckAnswer(TestQuestion question, TestAnswer answer)
         {
-            question.LastAnswer = testAnswer;
+            question.LastAnswer = answer;
 
             if (question.LastAnswer != null)
             {
@@ -86,13 +72,13 @@ namespace CardLearnApp.Pages
             }
         }
 
-        private void PrevButtonClicked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void PrevButtonClicked(object sender, RoutedEventArgs e)
         {
             currentQuestion = Math.Clamp(currentQuestion - 1, 0, testQuestions.Count - 1);
             ChangeData(currentQuestion, Next);
         }
 
-        private void NextButtonClicked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void NextButtonClicked(object sender, RoutedEventArgs e)
         {
             currentQuestion = Math.Clamp(currentQuestion + 1, 0, testQuestions.Count - 1);
             ChangeData(currentQuestion, Prev);
@@ -114,7 +100,7 @@ namespace CardLearnApp.Pages
             anim.Begin();
         }
 
-        private void ReturnToMain(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void ReturnToMain(object sender, RoutedEventArgs e)
         {
             MainPage.Instance.NavigateFrame("Home", null);
         }
