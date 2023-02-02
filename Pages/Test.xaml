@@ -4,10 +4,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CardLearnApp.Pages"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:media="using:Microsoft.UI.Xaml.Media"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <media:AcrylicBrush x:Key="CustomAcrylicInAppLuminosity" TintOpacity="0" TintLuminosityOpacity="0.1" TintColor="SkyBlue" FallbackColor="SkyBlue" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="8*"/>
@@ -28,13 +39,13 @@
             <StackPanel>
                 <muxc:ProgressBar x:Name="Progress" Value="0"/>
 
-                <Border Width="600" Height="350" Margin="0, 100, 0, 0" CornerRadius="10" RenderTransformOrigin="0.5,0.5">
-                    <Border.Background>
+                <Border Width="600" Background="{ThemeResource CustomAcrylicInAppLuminosity}" Height="350" Margin="0, 100, 0, 0" CornerRadius="10" RenderTransformOrigin="0.5,0.5">
+                    <!--<Border.Background>
                         <LinearGradientBrush>
                             <GradientStop Offset="0" Color="#FF48EADF" />
                             <GradientStop Offset="1" Color="#FF69C500"/>
                         </LinearGradientBrush>
-                    </Border.Background>
+                    </Border.Background>-->
                     
                     <Border.RenderTransform>
                         <CompositeTransform x:Name="Translation"/>

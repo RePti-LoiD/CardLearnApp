@@ -1,5 +1,6 @@
 ﻿using System;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace CardLearnApp
 {
@@ -7,6 +8,8 @@ namespace CardLearnApp
     {
         private string currentPageName;
         private static MainPage mainPage;
+
+        public Page currentPage;
 
         public static MainPage Instance { get => mainPage; private set => mainPage = value; }
 
@@ -43,7 +46,7 @@ namespace CardLearnApp
         {
             string type = $"{nameof(CardLearnApp)}.{nameof(Pages)}.{name}";
 
-            MainFrame.Navigate(Type.GetType(type), data);
+            MainFrame.Navigate(Type.GetType(type), data, new DrillInNavigationTransitionInfo());
             MainNav.PaneTitle = name;
         }
     }

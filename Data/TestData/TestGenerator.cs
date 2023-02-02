@@ -1,5 +1,4 @@
-﻿using CardLearnApp.Pages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace CardLearnApp.Data.TestData
@@ -15,46 +14,52 @@ namespace CardLearnApp.Data.TestData
 
             List<TestQuestion> questions = new List<TestQuestion>();
 
-            foreach (CardDataContainer item in cardsBundleContainer.CardDataContainers)
+            for (int j = 0; j < cardsBundleContainer.CardDataContainers.Count; j++)
             {
                 TestQuestion question = new TestQuestion();
-                question.QuestionTitle = item.FrontSideText;
-                question.Answers.Add(new TestAnswer(item.BackSideText, true));
 
+                question.QuestionTitle = cardsBundleContainer.CardDataContainers[j].FrontSideText;
+                question.Answers.Add(new TestAnswer(cardsBundleContainer.CardDataContainers[j].BackSideText, true));
 
-                int[] selectedIndexes = new int[3] { -1, -1, -1 };
-                
-                for (int i = 0; i < 3; i++)
-                {
-                    int index;
-                    do
-                    {
-                        index = random.Next(0, cardsBundleContainer.CardDataContainers.Count - 1);
-                    }
-                    while (IndexContains(selectedIndexes, index) && CompareAnswers(question.Answers[0], new TestAnswer(cardsBundleContainer.CardDataContainers[index].BackSideText, false)));
-                    selectedIndexes[i] = index;
-                }
+                int[] pickedQuestions = GetInts(3, 0, cardsBundleContainer.CardDataContainers.Count, j);
 
-                foreach (int i in selectedIndexes)
-                    question.Answers.Add(new TestAnswer(cardsBundleContainer.CardDataContainers[i].BackSideText, false));
+                foreach (var item in pickedQuestions)
+                    question.Answers.Add(new TestAnswer(cardsBundleContainer.CardDataContainers[item].BackSideText, false));
 
                 question.Answers.Shuffle();
 
                 questions.Add(question);
             }
-
             return new TestDataContainer(questions);
+
+            return new TestDataContainer();
         }
 
-        private static bool IndexContains(int[] array, int index)
+        private static int[] GetInts(int count, int lBound, int rBound, int except)
+        {
+            int randomValue;
+            int[] ints = new int[] { -1, -1, -1 };
+
+            for (int i = 0; i < ints.Length; i++)
+            {
+                do
+                {
+                    randomValue = new Random().Next(lBound, rBound);
+                }
+                while (IsUniqie(randomValue, ints) || randomValue == except);
+
+                ints[i] = randomValue;
+            }
+
+            return ints;
+        }
+
+        private static bool IsUniqie(int value, int[] array)
         {
             foreach (int i in array)
-                if (i == index)
-                    return true;
+                if (i == value) return true;
 
             return false;
         }
-
-        private static bool CompareAnswers(TestAnswer firstAnswer, TestAnswer nextAnswer) => !firstAnswer.Equals(nextAnswer);
     }
 }

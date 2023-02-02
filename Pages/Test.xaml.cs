@@ -12,6 +12,7 @@ namespace CardLearnApp.Pages
     {
         public List<TestQuestion> testQuestions = new List<TestQuestion>();
 
+        private UIElement transitionTarget;
         private int currentQuestion = 0;
 
         public Test()
@@ -21,8 +22,13 @@ namespace CardLearnApp.Pages
             Loaded += (x, y) =>
             {
                 if (testQuestions.Count == 0)
+                {
                     MainGrid.Visibility = Visibility.Collapsed;
-                else ReturnGrid.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    ReturnGrid.Visibility = Visibility.Collapsed;
+                }
             };
         }
 
@@ -30,16 +36,21 @@ namespace CardLearnApp.Pages
         {
             base.OnNavigatedTo(e);
 
-            ConnectedAnimation anim = ConnectedAnimationService.GetForCurrentView().GetAnimation("ForwardConnectedAnimation");
-            if (anim != null)
-            {
-                anim.TryStart(Icon);
-            }
-
             if (e.Parameter is TestDataContainer && (e.Parameter as TestDataContainer).Questions.Count > 0)
             {
                 testQuestions = (e.Parameter as TestDataContainer).Questions;
                 ChangeData(0, neutral);
+            }
+
+            if (testQuestions.Count == 0)
+                transitionTarget = ReturnGrid;
+            else
+                transitionTarget = MainGrid;
+
+            ConnectedAnimation anim = ConnectedAnimationService.GetForCurrentView().GetAnimation("ForwardConnectedAnimation");
+            if (anim != null)
+            {
+                anim.TryStart(transitionTarget);
             }
         }
 
@@ -47,7 +58,7 @@ namespace CardLearnApp.Pages
         {
             base.OnNavigatedFrom(e);
 
-            ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("ForwardConnectedAnimation", Icon);
+            ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("ForwardConnectedAnimation", transitionTarget);
         }
 
         private void AnswerButtonClicked(object sender, RoutedEventArgs e)
