@@ -26,7 +26,7 @@ namespace CardLearnApp.Pages
 
                 MainDataContainer mainDataContainer = MainDataContainer.Initialize();
 
-                foreach (CardsBundleContainer card in mainDataContainer.Bundles)
+                foreach (BundleContainer card in mainDataContainer.Bundles)
                 {
                     CardsBundleElement cardsBundleElement = new CardsBundleElement(card);
                     cardsBundleElement.OnBundleOpen += (nav) =>

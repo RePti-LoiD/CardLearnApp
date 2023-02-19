@@ -1,0 +1,36 @@
+﻿<Page
+    x:Class="CardLearnApp.Pages.Theory"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CardLearnApp.Pages"
+    xmlns:theory="using:CardLearnApp.DataPresentation.Theory"
+    xmlns:card="using:CardLearnApp.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="Transparent">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <GridView SelectionMode="None" x:Name="BlocksGrid"/>
+
+
+        <Grid Grid.Row="0" x:Name="ReturnGrid" Visibility="Collapsed">
+            <Grid>
+                <Button CornerRadius="20" Click="ReturnToMain" FontSize="22" FontWeight="Bold" Height="250" Width="250" Content="Select Theory Bundle" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.ZIndex="1"/>
+                <Grid Opacity="0.1">
+                    <FontIcon Glyph="&#xE8A7;" FontSize="150"/>
+                </Grid>
+            </Grid>
+        </Grid>
+        
+        <Grid Grid.Row="1">
+            <Border Background="{ThemeResource SystemControlBaseLowAcrylicWindowBrush}" x:Name="Bar"/>
+            <TextBlock HorizontalAlignment="Left" Text="{x:Bind bundleContainer.BundleName, TargetNullValue=Theory}" Margin="20" FontSize="30" VerticalAlignment="Center"/>
+        </Grid>
+    </Grid>
+</Page>

@@ -33,8 +33,10 @@ namespace CardLearnApp
 
         private void Main_SelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs args)
         {
-            if (!args.IsSettingsSelected)
-                NavigateFrame((args.SelectedItem as Microsoft.UI.Xaml.Controls.NavigationViewItem).Tag.ToString(), null);
+            Microsoft.UI.Xaml.Controls.NavigationViewItem item = args.SelectedItem as Microsoft.UI.Xaml.Controls.NavigationViewItem;
+
+            if (!args.IsSettingsSelected && item.Tag != null)
+                NavigateFrame(item.Tag.ToString(), null);
         }
 
         private void MainFrame_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)

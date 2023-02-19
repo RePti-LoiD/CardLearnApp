@@ -5,7 +5,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Animation;
-using static CardLearnApp.Data.CardsBundleElement;
 
 namespace CardLearnApp.Data
 {
@@ -14,12 +13,12 @@ namespace CardLearnApp.Data
         private int angle;
         private bool isFrontSide;
 
-        public CardsBundleContainer Container;
+        public BundleContainer Container;
 
         public delegate void BundleOpen(UIElement sener);
         public event BundleOpen OnBundleOpen;
 
-        public CardsBundleElement(CardsBundleContainer container)
+        public CardsBundleElement(BundleContainer container)
         {
             InitializeComponent();
 
@@ -79,6 +78,13 @@ namespace CardLearnApp.Data
             OnBundleOpen?.Invoke(this);
 
             MainPage.Instance.NavigateFrame(nameof(Card), Container);
+        }
+
+        private void TheoryButtonClicked(object sender, RoutedEventArgs e)
+        {
+            OnBundleOpen?.Invoke(this);
+
+            MainPage.Instance.NavigateFrame(nameof(Theory), Container);
         }
 
         private void TestClicked(object sender, RoutedEventArgs e)

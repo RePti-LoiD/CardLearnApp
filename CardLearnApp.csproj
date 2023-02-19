@@ -128,17 +128,23 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DataPresentation\CardEditorNode.xaml.cs">
+    <Compile Include="DataPresentation\Cards\CardEditorNode.xaml.cs">
       <DependentUpon>CardEditorNode.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DataPresentation\CardsBundleElement.xaml.cs">
+    <Compile Include="DataPresentation\Cards\CardsBundleElement.xaml.cs">
       <DependentUpon>CardsBundleElement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataPresentation\Theory\TheoryEditorNode.xaml.cs">
+      <DependentUpon>TheoryEditorNode.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataPresentation\Theory\TheoryElement.xaml.cs">
+      <DependentUpon>TheoryElement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Data\CardData\CardDataContainer.cs" />
-    <Compile Include="DataPresentation\CardElement.xaml.cs">
+    <Compile Include="DataPresentation\Cards\CardElement.xaml.cs">
       <DependentUpon>CardElement.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data\CardData\CardsBundleContainer.cs" />
+    <Compile Include="Data\CardData\BundleContainer.cs" />
     <Compile Include="Data\DayManipulations\DayInterpreter.cs" />
     <Compile Include="Data\MainDataContainer.cs" />
     <Compile Include="Data\MainDataSaveHandler.cs" />
@@ -146,6 +152,7 @@
     <Compile Include="Data\TestData\TestDataContainer.cs" />
     <Compile Include="Data\TestData\TestGenerator.cs" />
     <Compile Include="Data\TestData\TestQuestion.cs" />
+    <Compile Include="Data\TheoryData\TheoryDataContainer.cs" />
     <Compile Include="Data\Tool.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -161,6 +168,9 @@
     </Compile>
     <Compile Include="Pages\Test.xaml.cs">
       <DependentUpon>Test.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Theory.xaml.cs">
+      <DependentUpon>Theory.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -185,15 +195,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="DataPresentation\CardEditorNode.xaml">
+    <Page Include="DataPresentation\Cards\CardEditorNode.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DataPresentation\CardElement.xaml">
+    <Page Include="DataPresentation\Cards\CardElement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DataPresentation\CardsBundleElement.xaml">
+    <Page Include="DataPresentation\Cards\CardsBundleElement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataPresentation\Theory\TheoryEditorNode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataPresentation\Theory\TheoryElement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -217,6 +235,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Theory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
@@ -235,6 +257,7 @@
   <ItemGroup>
     <None Include="CardLearnApp_TemporaryKey.pfx" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

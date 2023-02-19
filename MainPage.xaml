@@ -12,7 +12,7 @@
     MinWidth="900">
 
     <Grid>
-        <controls:NavigationView PaneTitle="{Binding CurrentPageName}" x:Name="MainNav" SelectionChanged="Main_SelectionChanged">
+        <controls:NavigationView PaneTitle="{Binding CurrentPageName}" x:Name="MainNav" SelectionChanged="Main_SelectionChanged" AlwaysShowHeader="True" IsTabStop="False">
             <controls:NavigationView.MenuItems>
                 <controls:NavigationViewItemHeader Content="Main"/>
 
@@ -20,10 +20,23 @@
                 <controls:NavigationViewItem Content="Card" Icon="Copy" Tag="Card"/>
                 <controls:NavigationViewItem Content="Test" Icon="OpenWith" Tag="Test"/>
 
-                <controls:NavigationViewItemHeader Content="Other"/>
-                <controls:NavigationViewItem Content="Card Editor" Icon="Edit" Tag="Edit"/>
+                <controls:NavigationViewItem Content="Other" Icon="More">
+                    <controls:NavigationViewItem.MenuItems>
+                        <controls:NavigationViewItem Tag="Edit">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="&#xE7FB;" Margin="0, 0, 5, 0" VerticalAlignment="Center"/>
+                                <TextBlock VerticalAlignment="Center" Margin="5, 0, 0, 0">Card Editor</TextBlock>
+                            </StackPanel>
+                        </controls:NavigationViewItem>
 
-
+                        <controls:NavigationViewItem Tag="Theory">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="&#xE82D;" Margin="0, 0, 5, 0" VerticalAlignment="Center"/>
+                                <TextBlock VerticalAlignment="Center" Margin="5, 0, 0, 0">Theory</TextBlock>
+                            </StackPanel>
+                        </controls:NavigationViewItem>
+                    </controls:NavigationViewItem.MenuItems>
+                </controls:NavigationViewItem>
             </controls:NavigationView.MenuItems>
 
             <Frame x:Name="MainFrame" Background="{StaticResource SystemControlAcrylicElementBrush}" Loaded="MainFrame_Loaded"/>

@@ -5,8 +5,8 @@ namespace CardLearnApp.Data
     [System.Serializable]
     public class MainDataContainer
     {
-        private List<CardsBundleContainer> bundles;
-        public List<CardsBundleContainer> Bundles { get => bundles; set => bundles = value; }
+        private List<BundleContainer> bundles;
+        public List<BundleContainer> Bundles { get => bundles; set => bundles = value; }
 
 
         private static MainDataContainer instance;
@@ -20,7 +20,7 @@ namespace CardLearnApp.Data
 
         private MainDataContainer()
         {
-            bundles = new List<CardsBundleContainer>();
+            bundles = new List<BundleContainer>();
         }
     }
 }

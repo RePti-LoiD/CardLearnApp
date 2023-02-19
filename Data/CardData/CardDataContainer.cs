@@ -8,7 +8,7 @@ namespace CardLearnApp.Pages
         private string frontSideText;
         private string backSideText;
 
-        private bool isFrontSide;
+        private bool isLearned;
 
         public string FrontSideText
         {
@@ -22,10 +22,10 @@ namespace CardLearnApp.Pages
             set { backSideText = value; }
         }
 
-        public bool IsFrontSide
+        public bool IsLearned
         {
-            get { return isFrontSide;}
-            set { isFrontSide = value;}
+            get { return isLearned; }
+            set { isLearned = value; }
         }
 
         [NonSerialized]

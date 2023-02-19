@@ -10,7 +10,7 @@ namespace CardLearnApp.Pages
     {
         private List<CardElement> cardElements;
 
-        public CardsBundleContainer CardsBundleContainer { get; set; }
+        public BundleContainer CardsBundleContainer { get; set; }
         public Card()
         {
             InitializeComponent();
@@ -22,7 +22,9 @@ namespace CardLearnApp.Pages
                     cardElements = new List<CardElement>();
 
                     foreach (CardDataContainer item in CardsBundleContainer.CardDataContainers)
-                        cardElements.Add(new CardElement() { Container = item });
+                    {
+                        cardElements.Add(new CardElement() { Container = item, IsLearn = item.IsLearned });
+                    }
 
                     CardSlider.ItemsSource = cardElements;
 
@@ -33,9 +35,8 @@ namespace CardLearnApp.Pages
                     LearnButton.Click += (x1, y1) =>
                     {
                         cardElements[CardSlider.SelectedIndex].IsLearn = !cardElements[CardSlider.SelectedIndex].IsLearn;
+                        cardElements[CardSlider.SelectedIndex].Container.IsLearned = (bool)LearnButton.IsChecked;
                     };
-
-
 
                     CardSlider.SelectionChanged += (x2, y2) =>
                     {
@@ -65,7 +66,7 @@ namespace CardLearnApp.Pages
             if (anim != null)
                 anim.TryStart(CardSlider);
 
-            if (e.Parameter is CardsBundleContainer element)
+            if (e.Parameter is BundleContainer element)
             {
                 CardsBundleContainer = element;
             }

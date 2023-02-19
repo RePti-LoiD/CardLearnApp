@@ -4,6 +4,8 @@
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
   IgnorableNamespaces="uap mp">
 
   <Identity
@@ -42,8 +44,11 @@
       </uap:VisualElements>
     </Application>
   </Applications>
-
+	
   <Capabilities>
+	  <rescap:Capability Name="runFullTrust"/>
     <Capability Name="internetClient" />
+	  <uap:Capability Name="picturesLibrary"/>
+	  <uap:Capability Name="userAccountInformation"/>
   </Capabilities>
 </Package>

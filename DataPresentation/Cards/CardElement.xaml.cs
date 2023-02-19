@@ -34,7 +34,7 @@ namespace CardLearnApp.Pages
 
         private CardDataContainer container;
 
-        public CardDataContainer Container { get => container; set { container = value;  UpdateContext(); } }
+        public CardDataContainer Container { get => container; set { container = value; UpdateContext(); } }
 
         public CardElement()
         {
@@ -48,25 +48,25 @@ namespace CardLearnApp.Pages
 
         private void OnCardClick(object sender, TappedRoutedEventArgs e)
         {
-                angle += 180;
-                isFrontSide = !isFrontSide;
+            angle += 180;
+            isFrontSide = !isFrontSide;
 
-                FrontSide.Visibility = (Visibility)Convert.ToInt32(isFrontSide);
-                BackSide.Visibility = (Visibility)Convert.ToInt32(!isFrontSide);
+            FrontSide.Visibility = (Visibility)Convert.ToInt32(isFrontSide);
+            BackSide.Visibility = (Visibility)Convert.ToInt32(!isFrontSide);
 
-                Storyboard storyboard = new Storyboard();
-                DoubleAnimation animation = new DoubleAnimation
-                {
-                    From = angle - 180,
-                    To = angle,
-                    Duration = new Duration(TimeSpan.FromSeconds(0.2f))
-                };
+            Storyboard storyboard = new Storyboard();
+            DoubleAnimation animation = new DoubleAnimation
+            {
+                From = angle - 180,
+                To = angle,
+                Duration = new Duration(TimeSpan.FromSeconds(0.2f))
+            };
 
-                Storyboard.SetTarget(animation, Proje);
-                Storyboard.SetTargetProperty(animation, "RotationY");
-                storyboard.Children.Clear();
-                storyboard.Children.Add(animation);
-                storyboard.Begin();
+            Storyboard.SetTarget(animation, Proje);
+            Storyboard.SetTargetProperty(animation, "RotationY");
+            storyboard.Children.Clear();
+            storyboard.Children.Add(animation);
+            storyboard.Begin();
         }
     }
 }

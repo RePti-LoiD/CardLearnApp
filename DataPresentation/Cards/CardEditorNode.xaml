@@ -15,7 +15,7 @@
                 <MenuFlyoutItem Click="RemoveSelfClicked" Text="Remove"/>
             </MenuFlyout>
         </StackPanel.ContextFlyout>
-        <TextBox x:Name="FrontSide" HorizontalAlignment="Left" Width="250" Header="Front Side" VerticalAlignment="Top" Margin="10" TextChanged="FrontSideTextChanged"/>
-        <TextBox x:Name="BackSide" HorizontalAlignment="Left" Width="250" Header="Back Side" VerticalAlignment="Top" Margin="10" TextChanged="BackSideTextChanged"/>
+        <TextBox x:Name="FrontSide" Text="{x:Bind DataContainer.FrontSideText, TargetNullValue=Front}" HorizontalAlignment="Left" Width="250" Header="Front Side" VerticalAlignment="Top" Margin="10" TextChanged="FrontSideTextChanged"/>
+        <TextBox x:Name="BackSide"  Text="{x:Bind DataContainer.BackSideText, TargetNullValue=Back}" HorizontalAlignment="Left" Width="250" Header="Back Side" VerticalAlignment="Top" Margin="10" TextChanged="BackSideTextChanged"/>
     </StackPanel>
 </UserControl>

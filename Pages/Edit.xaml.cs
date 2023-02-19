@@ -1,5 +1,8 @@
 ﻿using CardLearnApp.Data;
+using CardLearnApp.Data.TheoryData;
 using CardLearnApp.DataPresentation;
+using CardLearnApp.DataPresentation.Theory;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Windows.UI.Xaml;
@@ -11,9 +14,10 @@ namespace CardLearnApp.Pages
 {
     public sealed partial class Edit : Page
     {
-        private CardsBundleContainer dataContainer;
+        private BundleContainer dataContainer;
 
         private ObservableCollection<CardEditorNode> nodes = new ObservableCollection<CardEditorNode>();
+        private ObservableCollection<TheoryEditorNode> theoryNodes = new ObservableCollection<TheoryEditorNode>();
 
         private bool bundleRecieve;
 
@@ -23,25 +27,53 @@ namespace CardLearnApp.Pages
 
             Loaded += (x, y) =>
             {
-                if (dataContainer != null && dataContainer.CardDataContainers != null)
+                if (dataContainer != null)
                 {
-                    foreach (CardDataContainer item in dataContainer.CardDataContainers)
-                    {
-                        CardEditorNode cardEditorNode = new CardEditorNode() { DataContainer = item };
-                        
-                        cardEditorNode.OnRemoveSelf += (removableItem) => {
-                            nodes.Remove(removableItem);    
-                        };
-
-                        nodes.Add(cardEditorNode);
-                    }
-
-                    DeadlineDate.Date = dataContainer.DeadLine.Date;
-                    MainPivot.Title = dataContainer.DeadLine.Date;
+                    DrawCardNodes();
+                    DrawTheoryNodes();
                 }
 
+                DeadlineDate.Date = dataContainer.DeadLine.Date;
+
+                TheoryNodeList.ItemsSource = theoryNodes;
                 NodeList.ItemsSource = nodes;
             };
+        }
+
+        private void DrawTheoryNodes()
+        {
+            if (dataContainer.TheoryDataContainers != null)
+            {
+                foreach (TheoryDataContainer item in dataContainer.TheoryDataContainers)
+                {
+                    TheoryEditorNode theoryEditorNode = new TheoryEditorNode() { DataContainer = item };
+
+                    theoryEditorNode.OnRemoveSelf += (removableItem) =>
+                    {
+                        theoryNodes.Remove(removableItem);
+                    };
+
+                    theoryNodes.Add(theoryEditorNode);
+                }
+            }
+        }
+
+        private void DrawCardNodes()
+        {
+            if (dataContainer.CardDataContainers != null)
+            {
+                foreach (CardDataContainer item in dataContainer.CardDataContainers)
+                {
+                    CardEditorNode cardEditorNode = new CardEditorNode() { DataContainer = item };
+
+                    cardEditorNode.OnRemoveSelf += (removableItem) =>
+                    {
+                        nodes.Remove(removableItem);
+                    };
+
+                    nodes.Add(cardEditorNode);
+                }
+            }
         }
 
         private void SaveButtonClicked(object sender, RoutedEventArgs e)
@@ -53,7 +85,7 @@ namespace CardLearnApp.Pages
             else
             {
                 MainDataContainer mainDataContainer = MainDataContainer.Initialize();
-                mainDataContainer.Bundles.Add(new CardsBundleContainer() 
+                mainDataContainer.Bundles.Add(new BundleContainer() 
                 { 
                     CardDataContainers = GetContainers(nodes), 
                     BundleDescription = BundleDescriptionTextBox.Text,
@@ -71,6 +103,7 @@ namespace CardLearnApp.Pages
             int index = mainDataContainer.Bundles.IndexOf(dataContainer);
 
             mainDataContainer.Bundles[index].CardDataContainers = GetContainers(nodes);
+            mainDataContainer.Bundles[index].TheoryDataContainers = GetContainers(theoryNodes);
             mainDataContainer.Bundles[index].BundleName = BundleNameTextBox.Text;
             mainDataContainer.Bundles[index].BundleDescription = BundleDescriptionTextBox.Text;
 
@@ -86,25 +119,30 @@ namespace CardLearnApp.Pages
 
             return bundleContainer;
         }
+        
+        private List<TheoryDataContainer> GetContainers(ObservableCollection<TheoryEditorNode> theoryDataContainers)
+        {
+            List<TheoryDataContainer> bundleContainer = new List<TheoryDataContainer>();
+
+            foreach (TheoryEditorNode item in theoryDataContainers)
+                bundleContainer.Add(item.DataContainer);
+
+            return bundleContainer;
+        }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            if (e.Parameter != null || e.Parameter is CardsBundleContainer cardsBundle)
+            if (e.Parameter != null || e.Parameter is BundleContainer)
             {
-                cardsBundle = e.Parameter as CardsBundleContainer;
-
-                BundleNameTextBox.Text = cardsBundle.BundleName;
-                BundleDescriptionTextBox.Text = cardsBundle.BundleDescription;
-
-                dataContainer = cardsBundle;
+                dataContainer = e.Parameter as BundleContainer;
 
                 bundleRecieve = true;
             }
             else
             {
-                dataContainer = new CardsBundleContainer();
+                dataContainer = new BundleContainer();
 
                 bundleRecieve = false;
             }
@@ -123,15 +161,28 @@ namespace CardLearnApp.Pages
             ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("ForwardConnectedAnimation", MainPivot);
         }
 
-        private void DeleteButtonClicked(object sender, RoutedEventArgs e)
+        private async void DeleteButtonClicked(object sender, RoutedEventArgs e)
         {
             MainDataContainer mainDataContainer = MainDataContainer.Initialize();
 
-            if (mainDataContainer.Bundles.Remove(dataContainer))
-            {
-                MainDataSaveHandler.SaveAllData();
+            ContentDialog dialog = new ContentDialog();
 
-                MainPage.Instance.NavigateFrame(nameof(Home), null);
+            dialog.XamlRoot = XamlRoot;
+            dialog.Title = "Are you sure you want to delete the bundle?";
+            dialog.PrimaryButtonText = "Delete";
+            dialog.SecondaryButtonText = "Cancel";
+            dialog.DefaultButton = ContentDialogButton.Primary;
+
+            var result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                if (mainDataContainer.Bundles.Remove(dataContainer))
+                {
+                    MainDataSaveHandler.SaveAllData();
+
+                    MainPage.Instance.NavigateFrame(nameof(Home), null);
+                }
             }
         }
 
@@ -139,7 +190,8 @@ namespace CardLearnApp.Pages
         {
             CardEditorNode cardEditorNode = new CardEditorNode() { DataContainer = new CardDataContainer("New", "New") };
 
-            cardEditorNode.OnRemoveSelf += (removableItem) => {
+            cardEditorNode.OnRemoveSelf += (removableItem) => 
+            {
                 nodes.Remove(removableItem);
             };
 
@@ -147,6 +199,21 @@ namespace CardLearnApp.Pages
 
             NodeList.ItemsSource = nodes;
             NodeList.CompleteViewChange();
+        }
+
+        private void AddNewTheoryItem(object sender, RoutedEventArgs e)
+        {
+            TheoryEditorNode theoryEditorNode = new TheoryEditorNode() { DataContainer = new TheoryDataContainer("header", "lorem ipsum", "https://raw.githubusercontent.com/RePti-LoiD/GachiPage/main/HtmlCssGachiPage/BankLogo.png") };
+
+            theoryEditorNode.OnRemoveSelf += (removableItem) =>
+            {
+                theoryNodes.Remove(removableItem);
+            };
+
+            theoryNodes.Add(theoryEditorNode);
+
+            TheoryNodeList.ItemsSource = theoryNodes;
+            TheoryNodeList.CompleteViewChange();
         }
 
         private void DeadlineTimeChange(DatePicker sender, DatePickerSelectedValueChangedEventArgs args)

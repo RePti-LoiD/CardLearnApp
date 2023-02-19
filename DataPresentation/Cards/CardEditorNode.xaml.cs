@@ -1,7 +1,6 @@
 ﻿using CardLearnApp.Pages;
 using Windows.UI.Xaml.Controls;
 
-
 namespace CardLearnApp.DataPresentation
 {
     public sealed partial class CardEditorNode : UserControl
@@ -28,12 +27,6 @@ namespace CardLearnApp.DataPresentation
         public CardEditorNode()
         {
             InitializeComponent();
-
-            Loaded += (x, y) => 
-            {
-                FrontSide.Text = DataContainer.FrontSideText != string.Empty ? DataContainer.FrontSideText : "Front";
-                BackSide.Text = DataContainer.BackSideText != string.Empty ? DataContainer.BackSideText : "Back";
-            };
         }
 
         private void FrontSideTextChanged(object sender, TextChangedEventArgs e)

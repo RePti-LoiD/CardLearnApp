@@ -18,9 +18,9 @@
                 <Pivot x:Name="MainPivot" Title="Create Bundle">
                     <PivotItem Header="Basic Info" Margin="20">
                         <StackPanel>
-                            <TextBox x:Name="BundleNameTextBox" Header="Bundle Name:" Margin="20" PlaceholderText="Name" MaxLength="20" HorizontalAlignment="Left" Width="200"/>
+                            <TextBox x:Name="BundleNameTextBox" Header="Bundle Name:" Margin="20" Text="{x:Bind dataContainer.BundleName}" PlaceholderText="Name" MaxLength="20" HorizontalAlignment="Left" Width="200"/>
 
-                            <TextBox AcceptsReturn="True" TextWrapping="Wrap" MaxHeight="172" ScrollViewer.VerticalScrollBarVisibility="Auto"  x:Name="BundleDescriptionTextBox" Width="500" Height="200" HorizontalAlignment="Left" Margin="20" Header="Bundle Description"/>
+                            <TextBox Text="{x:Bind dataContainer.BundleDescription}" AcceptsReturn="True" TextWrapping="Wrap" MaxHeight="172" ScrollViewer.VerticalScrollBarVisibility="Auto"  x:Name="BundleDescriptionTextBox" Width="500" Height="200" HorizontalAlignment="Left" Margin="20" Header="Bundle Description"/>
 
                             <DatePicker x:Name="DeadlineDate" Loaded="DeadlineTimeLoaded" SelectedDateChanged="DeadlineTimeChange"  Header="Deadline" Margin="20" MonthFormat="{}{month.full}" DayFormat="{}{day.integer(2)}"/>
 
@@ -29,10 +29,22 @@
 
                     <PivotItem Header="Cards">
                         <StackPanel>
-                            <GridView x:Name="NodeList" Padding="50"/>
-
+                            <GridView x:Name="NodeList" Padding="50" SelectionMode="None"/>
 
                             <Button Click="AddNewItem" HorizontalAlignment="Center" Margin="10">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Add New" Margin="0, 0, 10, 0"/>
+                                    <FontIcon Glyph="&#xE710;"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </PivotItem>
+
+                    <PivotItem Header="Theory">
+                        <StackPanel>
+                            <GridView x:Name="TheoryNodeList" Padding="50" SelectionMode="None"/>
+
+                            <Button Click="AddNewTheoryItem" HorizontalAlignment="Center" Margin="10">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Add New" Margin="0, 0, 10, 0"/>
                                     <FontIcon Glyph="&#xE710;"/>

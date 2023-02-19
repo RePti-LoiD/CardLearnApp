@@ -7,7 +7,7 @@ namespace CardLearnApp.Data.TestData
     {
         private static Random random = new Random();
 
-        public static TestDataContainer GenerateTest(CardsBundleContainer cardsBundleContainer)
+        public static TestDataContainer GenerateTest(BundleContainer cardsBundleContainer)
         {
             if (cardsBundleContainer.CardDataContainers.Count < 4)
                 return new TestDataContainer();
@@ -16,10 +16,12 @@ namespace CardLearnApp.Data.TestData
 
             for (int j = 0; j < cardsBundleContainer.CardDataContainers.Count; j++)
             {
-                TestQuestion question = new TestQuestion();
-
-                question.QuestionTitle = cardsBundleContainer.CardDataContainers[j].FrontSideText;
+                TestQuestion question = new TestQuestion()
+                {
+                    QuestionTitle = cardsBundleContainer.CardDataContainers[j].FrontSideText,
+                };
                 question.Answers.Add(new TestAnswer(cardsBundleContainer.CardDataContainers[j].BackSideText, true));
+
 
                 int[] pickedQuestions = GetInts(3, 0, cardsBundleContainer.CardDataContainers.Count, j);
 
@@ -31,20 +33,18 @@ namespace CardLearnApp.Data.TestData
                 questions.Add(question);
             }
             return new TestDataContainer(questions);
-
-            return new TestDataContainer();
         }
 
         private static int[] GetInts(int count, int lBound, int rBound, int except)
         {
             int randomValue;
-            int[] ints = new int[] { -1, -1, -1 };
+            int[] ints = new int[count];
 
             for (int i = 0; i < ints.Length; i++)
             {
                 do
                 {
-                    randomValue = new Random().Next(lBound, rBound);
+                    randomValue = random.Next(lBound, rBound);
                 }
                 while (IsUniqie(randomValue, ints) || randomValue == except);
 
