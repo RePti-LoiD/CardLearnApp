@@ -85,9 +85,9 @@ namespace CardLearnApp.Pages
             else
             {
                 MainDataContainer mainDataContainer = MainDataContainer.Initialize();
-                mainDataContainer.Bundles.Add(new BundleContainer() 
-                { 
-                    CardDataContainers = GetContainers(nodes), 
+                mainDataContainer.Bundles.Add(new BundleContainer()
+                {
+                    CardDataContainers = GetContainers(nodes),
                     BundleDescription = BundleDescriptionTextBox.Text,
                     BundleName = BundleNameTextBox.Text
                 });
