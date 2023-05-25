@@ -18,11 +18,22 @@
         <FontIcon Grid.Row="0" x:Name="Icon" FontFamily="Segoe Fluent Icons" Glyph="&#xea8a;" FontSize="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20"/>
 
         <TextBlock Grid.Row="0" Text="Welcome" x:Name="WelcomeText" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="25"/>
-        <TextBlock Grid.Row="0" Text="Welcome" x:Name="CurrentTime" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Light" Margin="0, 0, 0, 15" FontSize="20"/>
 
 
         <StackPanel Grid.Row="1">
-            <TextBlock Text="Your Bundles" FontSize="25" Margin="50"/>
+            
+            <Grid Margin="50, 0, 50, 0">
+                <AutoSuggestBox Width="300" 
+                            Margin="15" 
+                            PlaceholderText="Search"
+                            QuerySubmitted="AutoSuggestBox_QuerySubmitted"
+                            TextChanged="AutoSuggestBox_TextChanged"
+                            QueryIcon="Find">
+                </AutoSuggestBox>
+                <TextBlock Text="Your Bundles" Margin="15" FontSize="25" Width="200" HorizontalAlignment="Left"/>
+            </Grid>
+            
+            <NavigationViewItemSeparator/>
             <GridView SelectionMode="None" x:Name="BasicGridView" HorizontalAlignment="Center" VerticalAlignment="Top" BorderThickness="0"/>
         </StackPanel>
     </Grid>

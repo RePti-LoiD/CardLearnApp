@@ -1,4 +1,6 @@
 ﻿using CardLearnApp.Data;
+using CardLearnApp.Data.DataSeach;
+using CardLearnApp.DataPresentation.Cards;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
@@ -8,7 +10,8 @@ namespace CardLearnApp.Pages
 {
     public sealed partial class Card : Page
     {
-        private List<CardElement> cardElements;
+        private List<CardElement> cardElements = new List<CardElement>();
+        private List<MiniCardElement> miniCardElements = new List<MiniCardElement>();
 
         public BundleContainer CardsBundleContainer { get; set; }
         public Card()
@@ -19,18 +22,19 @@ namespace CardLearnApp.Pages
             {
                 if (CardsBundleContainer != null)
                 {
-                    cardElements = new List<CardElement>();
-
-                    foreach (CardDataContainer item in CardsBundleContainer.CardDataContainers)
+                    for (int i = 0; i < CardsBundleContainer.CardDataContainers.Count; i++)
                     {
-                        cardElements.Add(new CardElement() { Container = item, IsLearn = item.IsLearned });
+                        cardElements.Add(new CardElement() 
+                        { 
+                            Container = CardsBundleContainer.CardDataContainers[i], 
+                            IsLearn = CardsBundleContainer.CardDataContainers[i].IsLearned 
+                        });
+
+                        miniCardElements.Add(new MiniCardElement(CardsBundleContainer.CardDataContainers[i], i + 1));
                     }
 
+                    SetAllMiniCards();
                     CardSlider.ItemsSource = cardElements;
-
-                    BundleNameTxt.Text = CardsBundleContainer.BundleName;
-                    BundleDesc.Text = CardsBundleContainer.BundleDescription;
-
 
                     LearnButton.Click += (x1, y1) =>
                     {
@@ -81,6 +85,36 @@ namespace CardLearnApp.Pages
         private void ReturnToMain(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             MainPage.Instance.NavigateFrame("Home", null);
+        }
+
+        private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (string.IsNullOrEmpty(sender.Text))
+            {
+                SetAllMiniCards();
+                return;
+            }
+
+            MiniCards.Items.Clear();
+            List<string> names = new List<string>();
+
+            foreach (MiniCardElement item in miniCardElements)
+                names.Add(item.Container.FrontSideText);
+
+            List<string> results = SearchElement.ByName(names, sender.Text);
+
+            foreach (string resultStr in results)
+                foreach (MiniCardElement miniCardElement in miniCardElements)
+                    if (resultStr == miniCardElement.Container.FrontSideText)
+                        MiniCards.Items.Add(miniCardElement);
+        }
+
+        private void SetAllMiniCards()
+        {
+            MiniCards.Items.Clear();
+
+            foreach (MiniCardElement item in miniCardElements)
+                MiniCards.Items.Add(item);
         }
     }
 }

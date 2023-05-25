@@ -18,9 +18,9 @@
 
         <FontIcon Grid.Row="0" x:Name="Icon" FontFamily="Segoe Fluent Icons" Glyph="&#xe8c8;" FontSize="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20"/>
 
-        <TextBlock x:Name="BundleNameTxt" Text="{Binding BundleName}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+        <TextBlock x:Name="BundleNameTxt" Text="{x:Bind CardsBundleContainer.BundleName}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
 
-        <Grid Grid.Row="1" x:Name="ReturnGrid">
+        <Grid Grid.Row="1" x:Name="ReturnGrid" Visibility="Collapsed">
             <Grid>
                 <Button CornerRadius="20" Click="ReturnToMain" FontSize="25" FontWeight="Bold" Height="250" Width="250" Content="Select Card Bundle" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.ZIndex="1"/>
                 <Grid Opacity="0.1">
@@ -31,16 +31,32 @@
 
         <ScrollViewer Grid.Row="1" x:Name="MainGrid">
             <StackPanel>
-                <muxc:ProgressBar x:Name="Progress"/>
                 <FlipView MaxWidth="820" 
                           Height="700" 
                           x:Name="CardSlider" 
                           Background="Transparent"
                           VerticalAlignment="Top"/>
+
+                <muxc:ProgressBar x:Name="Progress" Width="840"/>
+                
                 <ToggleButton Content="Learned" Margin="20" HorizontalAlignment="Center" x:Name="LearnButton"/>
-                <Grid CornerRadius="10" Background="#FF373737" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
-                    <TextBlock x:Name="BundleDesc" HorizontalAlignment="Center" TextWrapping="WrapWholeWords" Margin="20" Width="800"/>
-                </Grid>
+                <StackPanel Width="840" CornerRadius="10" Background="#FF373737" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
+                    <TextBlock Text="Description:" Margin="10, 10, 0, 0" FontSize="14" FontWeight="Bold"/>
+                    <NavigationViewItemSeparator Margin="-10, 0, -10, 0"/>
+                    <TextBlock x:Name="BundleDesc" Text="{x:Bind CardsBundleContainer.BundleDescription}" HorizontalAlignment="Center" TextWrapping="WrapWholeWords" Margin="10" Width="800"/>
+                </StackPanel>
+
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FF373737" CornerRadius="10" Margin="20, 10" Width="840" Padding="5">
+                    <AutoSuggestBox Width="300" 
+                            Margin="10, 10, 10, -5" 
+                            PlaceholderText="Search"
+                            TextChanged="AutoSuggestBox_TextChanged"
+                            QueryIcon="Find">
+                    </AutoSuggestBox>
+                    <NavigationViewItemSeparator Margin="-10, 0, -10, 0"/>
+
+                    <ListView SelectionMode="None" x:Name="MiniCards"/>
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
     </Grid>

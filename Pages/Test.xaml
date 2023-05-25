@@ -36,110 +36,142 @@
         </Grid>
 
         <ScrollViewer x:Name="MainGrid">
-            <StackPanel>
-                <muxc:ProgressBar x:Name="Progress" Value="0"/>
+            <Grid Canvas.ZIndex="-1">
 
-                <Grid>
-                    <Image VerticalAlignment="Top" Source="https://raw.githubusercontent.com/RePti-LoiD/GachiPage/main/HtmlCssGachiPage/BankLogo.png" Width="250" Canvas.ZIndex="-1" Margin="0, 160, 0, 0" Opacity="0.5"/>
-                    <Border Width="600" Background="{ThemeResource CustomAcrylicInAppLuminosity}" Height="350" Margin="0, 100, 0, 0" CornerRadius="10" RenderTransformOrigin="0.5,0.5">
+                <Grid x:Name="GradeGrid" Opacity="0">
+                    <StackPanel Canvas.ZIndex="2"  Background="{ThemeResource CustomAcrylicInAppLuminosity}" Width="840" Height="600" CornerRadius="20">
+                        <TextBlock Text="Points" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="50, 50, 50, -50" FontSize="30"/>
+                        <TextBlock x:Name="Points" Text="89" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="50, 0, 50, -25" FontSize="200" FontWeight="SemiBold"/>
+                        <NavigationViewItemSeparator Width="350"/>
+                        <TextBlock Text="100" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="50" FontWeight="SemiBold"/>
 
-                        <Border.RenderTransform>
-                            <CompositeTransform x:Name="Translation"/>
-                        </Border.RenderTransform>
-                        <Grid>
-                            <TextBlock Width="400" TextAlignment="Center" x:Name="FrontSide" TextWrapping="Wrap" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Lorem ipsum dolor "/>
-                        </Grid>
-                    </Border>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Grade" Opacity="0.5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,2,0,0" FontSize="150" FontWeight="SemiBold"/>
+                            <TextBlock x:Name="Grade" Text="5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,2,0,0" FontSize="150" FontWeight="SemiBold"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <Grid Canvas.ZIndex="0">
+                        <FontIcon Glyph="&#xE73E;" FontSize="500" FontWeight="Black" HorizontalAlignment="Left" Foreground="LightGreen" Margin="528,0,0,0"/>
+                    </Grid>
                 </Grid>
-                <Border x:Name="MainBorder" Width="600" Height="300" Margin="20" CornerRadius="10">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
 
+                <Grid x:Name="TestGrid" Visibility="Visible">
+                    <StackPanel>
+                        <muxc:ProgressBar x:Name="Progress" Value="0"/>
 
-                        <Grid.Background>
-                            <LinearGradientBrush>
-                                <GradientStop x:Name="gradient1" Offset="0" Color="#FF547D2D"/>
-                                <GradientStop x:Name="gradient2" Offset="1" Color="#FF50A203"/>
-                            </LinearGradientBrush>
-                        </Grid.Background>
+                        <Grid>
+                            <Image VerticalAlignment="Top" Source="https://raw.githubusercontent.com/RePti-LoiD/GachiPage/main/HtmlCssGachiPage/BankLogo.png" Width="250" Canvas.ZIndex="-1" Margin="0, 160, 0, 0" Opacity="0.5"/>
+                            <Border Width="600" Background="{ThemeResource CustomAcrylicInAppLuminosity}" Height="350" Margin="0, 100, 0, 0" CornerRadius="10" RenderTransformOrigin="0.5,0.5">
 
-                        <Grid.Resources>
-                            <SolidColorBrush x:Name="Brush"/>
-
-                            <Storyboard x:Name="badAnswer">
-                                <ColorAnimation EnableDependentAnimation="True" Storyboard.TargetName="gradient1" Storyboard.TargetProperty="Color" To="#DC143C" Duration="0:0:0.5"/>
-                                <ColorAnimation EnableDependentAnimation="True" Storyboard.TargetName="gradient2" Storyboard.TargetProperty="Color" To="#800000" Duration="0:0:0.5"/>
-                            </Storyboard>
-
-                            <Storyboard x:Name="correctAnswer">
-                                <ColorAnimation EnableDependentAnimation="True" Storyboard.TargetName="gradient1" Storyboard.TargetProperty="Color" To="#FF547D2D" Duration="0:0:0.5"/>
-                                <ColorAnimation EnableDependentAnimation="True" Storyboard.TargetName="gradient2" Storyboard.TargetProperty="Color" To="#FF50A203" Duration="0:0:0.5"/>
-                            </Storyboard>
-
-                            <Storyboard x:Name="neutral">
-                                <ColorAnimation EnableDependentAnimation="True" Storyboard.TargetName="gradient1" Storyboard.TargetProperty="Color" To="#696969" Duration="0:0:0.5"/>
-                                <ColorAnimation EnableDependentAnimation="True" Storyboard.TargetName="gradient2" Storyboard.TargetProperty="Color" To="#606060" Duration="0:0:0.5"/>
-                            </Storyboard>
-
-                            <Storyboard x:Name="Next">
-                                <DoubleAnimation Storyboard.TargetName="Translation" Storyboard.TargetProperty="TranslateX" AutoReverse="True" From="0" To="-100" Duration="0:0:0.1"/>
-                            </Storyboard>
-
-                            <Storyboard x:Name="Prev">
-                                <DoubleAnimation Storyboard.TargetName="Translation" Storyboard.TargetProperty="TranslateX" AutoReverse="True" From="0" To="100" Duration="0:0:0.1"/>
-                            </Storyboard>
-                        </Grid.Resources>
-
-                        <Button Tag="0" Click="AnswerButtonClicked" Height="175" Width="305" x:Name="Answer1" Background="Transparent" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Border.RenderTransform>
+                                    <CompositeTransform x:Name="Translation"/>
+                                </Border.RenderTransform>
+                                <Grid>
+                                    <TextBlock Width="400" TextAlignment="Center" x:Name="FrontSide" TextWrapping="Wrap" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Lorem ipsum dolor "/>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                        <Border x:Name="MainBorder" Width="600" Height="300" Margin="20" CornerRadius="10">
                             <Grid>
-                                <TextBlock x:Name="Answer1Text" Width="290" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="A" FontSize="25" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="A" FontSize="200"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#192B2B2B"/>
-                            </Grid>
-                        </Button>
-                        <Button Tag="1" Click="AnswerButtonClicked" Height="175" Width="305" x:Name="Answer2" Background="Transparent" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Grid>
-                                <TextBlock x:Name="Answer2Text" Width="290" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="B" FontSize="25" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="B" FontSize="200"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#192B2B2B"/>
-                            </Grid>
-                        </Button>
-                        <Button Tag="2" Click="AnswerButtonClicked" Height="175" Width="305" x:Name="Answer3" Background="Transparent" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Grid>
-                                <TextBlock x:Name="Answer3Text" Width="290" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="C" FontSize="25" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="C" FontSize="200"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#192B2B2B"/>
-                            </Grid>
-                        </Button>
-                        <Button Tag="3" Click="AnswerButtonClicked" Height="175" Width="305" x:Name="Answer4" Background="Transparent" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Grid>
-                                <TextBlock x:Name="Answer4Text" Width="290" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="D" FontSize="25" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="D" FontSize="200"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#192B2B2B"/>
-                            </Grid>
-                        </Button>
-                    </Grid>
-                </Border>
-                <Border Background="#FF373737" Width="600" Height="50" Margin="20" CornerRadius="10">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
 
-                        <Button Click="PrevButtonClicked" Height="60" Width="305" HorizontalAlignment="Center" Grid.Column="0" Background="Transparent">
-                            <FontIcon Glyph="&#xE892;"/>
-                        </Button>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
 
-                        <Button Click="NextButtonClicked" Height="60" Width="305" HorizontalAlignment="Center" Grid.Column="1" Background="Transparent">
-                            <FontIcon Glyph="&#xE893;"/>
-                        </Button>
-                    </Grid>
-                </Border>
-            </StackPanel>
+                                <Grid.Background>
+                                    <LinearGradientBrush>
+                                        <GradientStop x:Name="gradient1" Offset="0" Color="#FF547D2D"/>
+                                        <GradientStop x:Name="gradient2" Offset="1" Color="#FF50A203"/>
+                                    </LinearGradientBrush>
+                                </Grid.Background>
+
+                                <Grid.Resources>
+                                    <SolidColorBrush x:Name="Brush"/>
+
+                                    <Storyboard x:Name="badAnswer">
+                                        <ColorAnimation EnableDependentAnimation="True" Storyboard.TargetName="gradient1" Storyboard.TargetProperty="Color" To="#DC143C" Duration="0:0:0.5"/>
+                                        <ColorAnimation EnableDependentAnimation="True" Storyboard.TargetName="gradient2" Storyboard.TargetProperty="Color" To="#800000" Duration="0:0:0.5"/>
+                                    </Storyboard>
+
+                                    <Storyboard x:Name="correctAnswer">
+                                        <ColorAnimation EnableDependentAnimation="True" Storyboard.TargetName="gradient1" Storyboard.TargetProperty="Color" To="#FF547D2D" Duration="0:0:0.5"/>
+                                        <ColorAnimation EnableDependentAnimation="True" Storyboard.TargetName="gradient2" Storyboard.TargetProperty="Color" To="#FF50A203" Duration="0:0:0.5"/>
+                                    </Storyboard>
+
+                                    <Storyboard x:Name="neutral">
+                                        <ColorAnimation EnableDependentAnimation="True" Storyboard.TargetName="gradient1" Storyboard.TargetProperty="Color" To="#696969" Duration="0:0:0.5"/>
+                                        <ColorAnimation EnableDependentAnimation="True" Storyboard.TargetName="gradient2" Storyboard.TargetProperty="Color" To="#606060" Duration="0:0:0.5"/>
+                                    </Storyboard>
+
+                                    <Storyboard x:Name="Next">
+                                        <DoubleAnimation Storyboard.TargetName="Translation" Storyboard.TargetProperty="TranslateX" AutoReverse="True" From="0" To="-100" Duration="0:0:0.1"/>
+                                    </Storyboard>
+
+                                    <Storyboard x:Name="Prev">
+                                        <DoubleAnimation Storyboard.TargetName="Translation" Storyboard.TargetProperty="TranslateX" AutoReverse="True" From="0" To="100" Duration="0:0:0.1"/>
+                                    </Storyboard>
+                                </Grid.Resources>
+
+                                <Button Tag="0" Click="AnswerButtonClicked" Height="175" Width="305" x:Name="Answer1" Background="Transparent" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Grid>
+                                        <TextBlock x:Name="Answer1Text" Width="290" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="A" FontSize="25" TextWrapping="WrapWholeWords"/>
+                                        <TextBlock Text="A" FontSize="200"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#192B2B2B"/>
+                                    </Grid>
+                                </Button>
+
+                                <Button Tag="1" Click="AnswerButtonClicked" Height="175" Width="305" x:Name="Answer2" Background="Transparent" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Grid>
+                                        <TextBlock x:Name="Answer2Text" Width="290" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="B" FontSize="25" TextWrapping="WrapWholeWords"/>
+                                        <TextBlock Text="B" FontSize="200"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#192B2B2B"/>
+                                    </Grid>
+                                </Button>
+                                <Button Tag="2" Click="AnswerButtonClicked" Height="175" Width="305" x:Name="Answer3" Background="Transparent" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Grid>
+                                        <TextBlock x:Name="Answer3Text" Width="290" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="C" FontSize="25" TextWrapping="WrapWholeWords"/>
+                                        <TextBlock Text="C" FontSize="200"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#192B2B2B"/>
+                                    </Grid>
+                                </Button>
+                                <Button Tag="3" Click="AnswerButtonClicked" Height="175" Width="305" x:Name="Answer4" Background="Transparent" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Grid>
+                                        <TextBlock x:Name="Answer4Text" Width="290" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="D" FontSize="25" TextWrapping="WrapWholeWords"/>
+                                        <TextBlock Text="D" FontSize="200"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#192B2B2B"/>
+                                    </Grid>
+                                </Button>
+                            </Grid>
+                        </Border>
+
+                        <StackPanel>
+                            <TextBlock Text="Attempts" HorizontalAlignment="Center" FontSize="20" FontWeight="SemiBold"/>
+
+                            <StackPanel Margin="-6, 0, 0, 0" HorizontalAlignment="Center" Orientation="Horizontal" Spacing="10">
+                                <TextBlock x:Name="Tryes" Text="3" FontSize="25" FontWeight="Bold" FontStyle="Italic"/>
+                                <Border Margin="5, 0, 0, 0" Height="28" Width="2" Background="{ThemeResource SystemColorGrayTextColor}" RenderTransformOrigin="0.5,0.5">
+                                    <Border.RenderTransform>
+                                        <CompositeTransform Rotation="20"/>
+                                    </Border.RenderTransform>
+                                </Border>
+
+                                <TextBlock Text="3" FontSize="25" FontWeight="Bold" FontStyle="Italic"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <Button Margin="-720, 100, 0, 0" Click="PrevButtonClicked" CornerRadius="50" Height="60" Width="60" HorizontalAlignment="Center" Grid.Column="0">
+                        <FontIcon Glyph="&#xE892;"/>
+                    </Button>
+
+                    <Button Margin="720, 100, 0, 0" Click="NextButtonClicked" CornerRadius="50" Height="60" Width="60" HorizontalAlignment="Center" Grid.Column="1">
+                        <FontIcon Glyph="&#xE893;"/>
+                    </Button>
+                </Grid>
+            </Grid>
         </ScrollViewer>
 
         <Grid Grid.Row="1">

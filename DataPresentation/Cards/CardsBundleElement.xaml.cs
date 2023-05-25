@@ -98,5 +98,8 @@ namespace CardLearnApp.Data
         {
             OnCardClick();
         }
+
+        public void TriggerOpen() =>
+            OpenButtonClicked(null, null);
     }
 }

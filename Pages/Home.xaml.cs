@@ -1,6 +1,9 @@
 ﻿using CardLearnApp.Data;
+using CardLearnApp.Data.DataSeach;
 using CardLearnApp.Data.DayManipulations;
 using System.Collections.Generic;
+using System.Linq;
+using System.Xml.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
@@ -59,6 +62,34 @@ namespace CardLearnApp.Pages
             base.OnNavigatedFrom(e);
 
             ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("ForwardConnectedAnimation", navObj);
+        }
+
+        private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            try
+            {
+                foreach (var item in cardsArrayContainers)
+                {
+                    if (item.Container.BundleName == args.QueryText)
+                    {
+                        item.TriggerOpen();
+
+                        break;
+                    }
+                }
+            }
+            catch (System.Exception) { }
+        }
+
+        private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason != AutoSuggestionBoxTextChangeReason.UserInput) return;
+
+            List<string> names = new List<string>();
+
+            for (int i = 0; i < cardsArrayContainers.Count; i++) names.Add(cardsArrayContainers[i].Container.BundleName);
+
+            sender.ItemsSource = SearchElement.ByName(names, sender.Text);
         }
     }
 }

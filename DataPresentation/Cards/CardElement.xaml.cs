@@ -34,16 +34,11 @@ namespace CardLearnApp.Pages
 
         private CardDataContainer container;
 
-        public CardDataContainer Container { get => container; set { container = value; UpdateContext(); } }
+        public CardDataContainer Container { get => container; set { container = value; } }
 
         public CardElement()
         {
             InitializeComponent();
-        }
-
-        private void UpdateContext()
-        {
-            RotationObj.DataContext = container;
         }
 
         private void OnCardClick(object sender, TappedRoutedEventArgs e)
