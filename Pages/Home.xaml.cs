@@ -1,9 +1,8 @@
 ﻿using CardLearnApp.Data;
-using CardLearnApp.Data.DataSeach;
+using CardLearnApp.Data.DataSearch;
 using CardLearnApp.Data.DayManipulations;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
@@ -35,6 +34,40 @@ namespace CardLearnApp.Pages
                     cardsBundleElement.OnBundleOpen += (nav) =>
                     {
                         navObj = nav;
+                    };
+                    cardsBundleElement.OnBundleDelete += async (nav) =>
+                    {
+                        ContentDialog dialog = new ContentDialog();
+
+                        dialog.XamlRoot = XamlRoot;
+                        dialog.Title = "Are you sure you want to delete the bundle?";
+                        dialog.PrimaryButtonText = "Delete";
+                        dialog.SecondaryButtonText = "Cancel";
+                        dialog.DefaultButton = ContentDialogButton.Primary;
+
+                        var result = await dialog.ShowAsync();
+
+                        if (result == ContentDialogResult.Primary)
+                        {
+                            if (mainDataContainer.Bundles.Remove(nav.Container))
+                            {
+                                cardsArrayContainers.Remove(nav);
+                                BasicGridView.ItemsSource = null;
+                                BasicGridView.ItemsSource = cardsArrayContainers;
+
+                                MainDataSaveHandler.SaveAllData();
+                            }
+                            else
+                            {
+                                ContentDialog errorDialog = new ContentDialog();
+
+                                errorDialog.XamlRoot = XamlRoot;
+                                errorDialog.Title = "Smth went frong";
+                                errorDialog.PrimaryButtonText = "Ok";
+                                errorDialog.DefaultButton = ContentDialogButton.Primary;
+                                await errorDialog.ShowAsync();
+                            }
+                        }
                     };
 
                     cardsArrayContainers.Add(cardsBundleElement);

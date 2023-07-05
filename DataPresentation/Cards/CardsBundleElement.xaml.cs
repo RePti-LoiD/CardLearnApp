@@ -15,8 +15,11 @@ namespace CardLearnApp.Data
 
         public BundleContainer Container;
 
-        public delegate void BundleOpen(UIElement sener);
+        public delegate void BundleOpen(UIElement sender);
         public event BundleOpen OnBundleOpen;
+
+        public delegate void BundleDelete(CardsBundleElement sender);
+        public event BundleDelete OnBundleDelete;
 
         public CardsBundleElement(BundleContainer container)
         {
@@ -101,5 +104,10 @@ namespace CardLearnApp.Data
 
         public void TriggerOpen() =>
             OpenButtonClicked(null, null);
+
+        private void DeleteButtonClicked(object sender, RoutedEventArgs e)
+        {
+            OnBundleDelete?.Invoke(this);
+        }
     }
 }

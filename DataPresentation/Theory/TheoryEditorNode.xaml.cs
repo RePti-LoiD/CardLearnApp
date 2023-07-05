@@ -22,16 +22,16 @@ namespace CardLearnApp.DataPresentation.Theory
         }
 
         private TheoryDataContainer dataContainer;
-        public TheoryDataContainer DataContainer 
-        { 
-            get => dataContainer; 
-            set 
-            { 
+        public TheoryDataContainer DataContainer
+        {
+            get => dataContainer;
+            set
+            {
                 dataContainer = value;
 
-                if (value.LinkToPic != null || value.LinkToPic != string.Empty) 
-                    SetPicture(value.LinkToPic); 
-            } 
+                if (value.LinkToPic != null || value.LinkToPic != string.Empty)
+                    SetPicture(value.LinkToPic);
+            }
         }
 
         public TheoryEditorNode()

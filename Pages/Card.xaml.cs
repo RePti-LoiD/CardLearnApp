@@ -1,5 +1,5 @@
 ﻿using CardLearnApp.Data;
-using CardLearnApp.Data.DataSeach;
+using CardLearnApp.Data.DataSearch;
 using CardLearnApp.DataPresentation.Cards;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
@@ -24,10 +24,10 @@ namespace CardLearnApp.Pages
                 {
                     for (int i = 0; i < CardsBundleContainer.CardDataContainers.Count; i++)
                     {
-                        cardElements.Add(new CardElement() 
-                        { 
-                            Container = CardsBundleContainer.CardDataContainers[i], 
-                            IsLearn = CardsBundleContainer.CardDataContainers[i].IsLearned 
+                        cardElements.Add(new CardElement()
+                        {
+                            Container = CardsBundleContainer.CardDataContainers[i],
+                            IsLearn = CardsBundleContainer.CardDataContainers[i].IsLearned
                         });
 
                         miniCardElements.Add(new MiniCardElement(CardsBundleContainer.CardDataContainers[i], i + 1));

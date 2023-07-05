@@ -26,7 +26,8 @@
 
                 <MenuFlyoutItem Click="EditButtonClicked" Text="Edit" Icon="Edit"/>
                 <MenuFlyoutItem Click="TheoryButtonClicked" Text="Theory" Icon="Library"/>
-                <MenuFlyoutItem Click="TestClicked" Text="Test"/>
+                <MenuFlyoutItem Click="TestClicked" Text="Test" Icon="AllApps"/>
+                <MenuFlyoutItem Click="DeleteButtonClicked" Text="Delete" Icon="Delete"/>
             </MenuFlyout>
         </Grid.ContextFlyout>
 

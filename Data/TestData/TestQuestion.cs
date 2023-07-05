@@ -16,24 +16,30 @@ namespace CardLearnApp.Data.TestData
         public List<TestAnswer> Answers { get => answers; set => answers = value; }
 
         private TestAnswer lastAnswer;
-        public TestAnswer LastAnswer { get => lastAnswer;
-            set {
+        public TestAnswer LastAnswer
+        {
+            get => lastAnswer;
+            set
+            {
 
-                if (answerRetryCounter > 0 )
+                if (answerRetryCounter > 0)
                 {
                     lastAnswer = value;
-                    
+
                     if (lastAnswer != null && !lastAnswer.IsCorrect)
                         AnswerRetryCounter--;
                 }
             }
         }
-        public int AnswerRetryCounter { get => answerRetryCounter; 
-            private set {
+        public int AnswerRetryCounter
+        {
+            get => answerRetryCounter;
+            private set
+            {
                 answerRetryCounter = value;
 
                 OnCounterChange?.Invoke(answerRetryCounter);
-            } 
+            }
         }
 
         public TestQuestion() { }

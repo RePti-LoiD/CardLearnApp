@@ -21,7 +21,7 @@ namespace CardLearnApp.DataPresentation
         }
 
         private CardDataContainer dataContainer;
-        
+
         public CardDataContainer DataContainer { get => dataContainer; set => dataContainer = value; }
 
         public CardEditorNode()

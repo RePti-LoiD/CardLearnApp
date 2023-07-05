@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CardLearnApp.Pages;
+using System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 
@@ -13,7 +14,9 @@ namespace CardLearnApp
 
         public static MainPage Instance { get => mainPage; private set => mainPage = value; }
 
-        public string CurrentPageName { get => currentPageName;
+        public string CurrentPageName
+        {
+            get => currentPageName;
             private set
             {
                 currentPageName = value;
@@ -37,6 +40,8 @@ namespace CardLearnApp
 
             if (!args.IsSettingsSelected && item.Tag != null)
                 NavigateFrame(item.Tag.ToString(), null);
+            else if (args.IsSettingsSelected)
+            { }
         }
 
         private void MainFrame_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)

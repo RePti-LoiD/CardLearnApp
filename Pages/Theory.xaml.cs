@@ -20,7 +20,7 @@ namespace CardLearnApp.Pages
                     foreach (var item in bundleContainer.TheoryDataContainers)
                         BlocksGrid.Items.Add(new TheoryElement() { DataContainer = item });
 
-                else 
+                else
                     ReturnGrid.Visibility = Windows.UI.Xaml.Visibility.Visible;
             };
         }

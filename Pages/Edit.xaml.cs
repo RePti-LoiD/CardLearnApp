@@ -5,6 +5,7 @@ using CardLearnApp.DataPresentation.Theory;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
@@ -119,7 +120,7 @@ namespace CardLearnApp.Pages
 
             return bundleContainer;
         }
-        
+
         private List<TheoryDataContainer> GetContainers(ObservableCollection<TheoryEditorNode> theoryDataContainers)
         {
             List<TheoryDataContainer> bundleContainer = new List<TheoryDataContainer>();
@@ -190,12 +191,12 @@ namespace CardLearnApp.Pages
         {
             CardEditorNode cardEditorNode = new CardEditorNode() { DataContainer = new CardDataContainer("New", "New") };
 
-            cardEditorNode.OnRemoveSelf += (removableItem) => 
+            cardEditorNode.OnRemoveSelf += (removableItem) =>
             {
                 nodes.Remove(removableItem);
             };
 
-            nodes.Add(cardEditorNode );
+            nodes.Add(cardEditorNode);
 
             NodeList.ItemsSource = nodes;
             NodeList.CompleteViewChange();
@@ -224,6 +225,21 @@ namespace CardLearnApp.Pages
         private void DeadlineTimeLoaded(object sender, RoutedEventArgs e)
         {
             (sender as DatePicker).Date = dataContainer.DeadLine;
+        }
+
+        private void Grid_DragOverCustomized(object sender, DragEventArgs e)
+        {
+            e.AcceptedOperation = DataPackageOperation.Copy;
+            e.DragUIOverride.Caption = "Drop Json file";
+
+            e.DragUIOverride.IsCaptionVisible = true;
+            e.DragUIOverride.IsContentVisible = true;
+            e.DragUIOverride.IsGlyphVisible = true;
+        }
+
+        private async void Grid_Drop(object sender, DragEventArgs e)
+        {
+
         }
     }
 }

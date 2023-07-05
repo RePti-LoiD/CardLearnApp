@@ -178,7 +178,7 @@ namespace CardLearnApp.Pages
                 }
             }
 
-            return (int) Math.Round(totalCost);
+            return (int)Math.Round(totalCost);
         }
     }
 }
