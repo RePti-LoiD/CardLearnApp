@@ -19,12 +19,12 @@
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <GenerateAppInstallerFile>True</GenerateAppInstallerFile>
-    <PackageCertificateThumbprint>5C5AA1F79845F1413D55DEA9698D6A47DF45C163</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>B5FB77E44C924CA4E52E4B6A244C21A94AC0A239</PackageCertificateThumbprint>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA512</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
     <AppInstallerUri>E:\ApkKeyStorage\UwpApps</AppInstallerUri>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
   </PropertyGroup>
@@ -152,6 +152,7 @@
     <Compile Include="Data\DayManipulations\DayInterpreter.cs" />
     <Compile Include="Data\MainDataContainer.cs" />
     <Compile Include="Data\MainDataSaveHandler.cs" />
+    <Compile Include="Data\ConfigurationData\AppConfiguration.cs" />
     <Compile Include="Data\TestData\TestAnswer.cs" />
     <Compile Include="Data\TestData\TestDataContainer.cs" />
     <Compile Include="Data\TestData\TestGenerator.cs" />
@@ -265,7 +266,6 @@
   <ItemGroup>
     <None Include="CardLearnApp_TemporaryKey.pfx" />
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

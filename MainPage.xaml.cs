@@ -1,5 +1,7 @@
 ﻿using CardLearnApp.Pages;
 using System;
+using System.Net;
+using System.Net.Sockets;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 
@@ -31,7 +33,17 @@ namespace CardLearnApp
             Loaded += (x, y) =>
             {
                 mainPage = this;
+                InitSettingsConfiguration();
             };
+        }
+
+        private void InitSettingsConfiguration()
+        {
+            IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse("192.168.1.77"), 8888);
+
+            TcpClient client = new TcpClient();
+
+            client.Connect(endPoint);
         }
 
         private void Main_SelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs args)

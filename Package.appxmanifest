@@ -11,7 +11,7 @@
   <Identity
     Name="f35957b3-9a01-4c21-a9d5-65f59799cbd9"
     Publisher="CN=delhi"
-    Version="1.1.2.0" />
+    Version="1.1.3.0" />
 
   <mp:PhoneIdentity PhoneProductId="f35957b3-9a01-4c21-a9d5-65f59799cbd9" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.IO;
 using Windows.ApplicationModel.DataTransfer;
 
@@ -12,8 +13,10 @@ namespace CardLearnApp.Data
         public static void RestoreData()
         {
             MainDataContainer mainDataContainer = MainDataContainer.Initialize();
-
-            mainDataContainer.Bundles = JsonConvert.DeserializeObject<MainDataContainer>(File.ReadAllText(JsonDataPath)).Bundles;
+            if (File.Exists(JsonDataPath)) 
+                mainDataContainer.Bundles = JsonConvert.DeserializeObject<MainDataContainer>(File.ReadAllText(JsonDataPath)).Bundles;
+            else
+                mainDataContainer.Bundles = new List<BundleContainer>();
         }
 
         public static void SaveAllData()
