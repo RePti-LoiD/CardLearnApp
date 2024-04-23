@@ -1,0 +1,15 @@
+﻿<Page
+    x:Class="CardLearnApp.Pages.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CardLearnApp.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Spacing="15" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <TextBlock FontSize="18" FontWeight="SemiBold">Ping education server status</TextBlock>
+        <Button Click="Button_Click">Ping</Button>
+        <TextBlock x:Name="PingStatus"></TextBlock>
+    </StackPanel>
+</Page>

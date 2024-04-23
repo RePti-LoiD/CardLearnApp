@@ -9,7 +9,7 @@
     Width="250" 
     Height="300">
 
-    <Grid x:Name="MainGrid" Width="250" Height="300" Background="#1e1e1e" Tapped="Grid_Tapped" CornerRadius="15">
+    <Grid x:Name="MainGrid" Width="250" Height="300" Background="{StaticResource CardBackgroundFillColorDefaultBrush}" Tapped="Grid_Tapped" CornerRadius="15">
         <Grid.Projection>
             <PlaneProjection x:Name="Proje"/>
         </Grid.Projection>
@@ -80,7 +80,7 @@
 
             <TextBlock Text="{x:Bind Container.BundleDescription}" Margin="10" FontSize="16" TextWrapping="WrapWholeWords"/>
 
-            <Grid Grid.Row="1" Margin="5" CornerRadius="10" Background="#FF252525">
+            <Grid Grid.Row="1" Margin="5" CornerRadius="10" Background="{StaticResource CardBackgroundFillColorSecondaryBrush}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="5*"/>

@@ -39,11 +39,7 @@ namespace CardLearnApp
 
         private void InitSettingsConfiguration()
         {
-            IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse("192.168.1.77"), 8888);
-
-            TcpClient client = new TcpClient();
-
-            client.Connect(endPoint);
+            
         }
 
         private void Main_SelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs args)
@@ -53,7 +49,7 @@ namespace CardLearnApp
             if (!args.IsSettingsSelected && item.Tag != null)
                 NavigateFrame(item.Tag.ToString(), null);
             else if (args.IsSettingsSelected)
-            { }
+                NavigateFrame(item.Tag.ToString(), null);
         }
 
         private void MainFrame_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)

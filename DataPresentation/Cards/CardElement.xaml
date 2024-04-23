@@ -45,24 +45,22 @@
                            HorizontalAlignment="Center" 
                            VerticalAlignment="Center"/>
 
-                <StackPanel Orientation="Horizontal" Visibility="Collapsed" x:Name="BackSide" Width="700" Height="480">
-                    <ScrollViewer>
-                        <TextBlock Text="{x:Bind container.BackSideText}" 
-                                   FontSize="50"
-                                   TextAlignment="Center"
-                                   TextWrapping="WrapWholeWords"
-                                   HorizontalAlignment="Center"
-                                   FontFamily="Segoe MDL2"
-                                   Foreground="#1e1e1e"
-                                   VerticalAlignment="Center" 
-                                   RenderTransformOrigin="0.5,0.5">
-                        <TextBlock.RenderTransform>
-                            <CompositeTransform ScaleY="1" ScaleX="-1"/>
-                        </TextBlock.RenderTransform>
-                    </TextBlock>
-                    </ScrollViewer>
-                    <!--ДОБАВИТЬ СЮДА ИЗОБРАЖЕНИЯ-->
-                </StackPanel>
+                <TextBlock  x:Name="BackSide"
+                            Width="700"
+                            TextAlignment="Center"
+                            Text="{x:Bind  container.BackSideText}" 
+                            TextWrapping="WrapWholeWords"
+                            FontSize="50" 
+                            Foreground="#1e1e1e"
+                            FontWeight="SemiBold"
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed">
+                    <TextBlock.RenderTransform>
+                        <CompositeTransform ScaleX="-1" TranslateX="0"/>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+
+                <!--ДОБАВИТЬ СЮДА ИЗОБРАЖЕНИЯ-->
                 <FontIcon x:Name="Icon" Visibility="Visible" FontFamily="Segoe Fluent Icons" FontSize="30" Glyph="&#xe734;" HorizontalAlignment="Right" Margin="20" VerticalAlignment="Top"/>
                 <FontIcon x:Name="Icon2" Visibility="Collapsed" FontFamily="Segoe Fluent Icons" FontSize="30" Glyph="&#xe735;" HorizontalAlignment="Right" Margin="20" VerticalAlignment="Top"/>
             </Grid>
