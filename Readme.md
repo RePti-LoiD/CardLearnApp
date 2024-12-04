@@ -1,6 +1,5 @@
 # Welcome to CardLearn App!
 
-> Далее идёт описание API для взаимодействия разработчиков с системой обучения.
-_Api готово ~ 29%_
+> https://repti-loid.github.io/devBacement/projectCards.html
 
 ### Debug токен: `ad7b-ga4d-b213-1gk1` 
